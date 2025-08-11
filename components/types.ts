@@ -12,6 +12,7 @@ export enum QuestionFormat {
     Number = 'number',
     TrueFalse = 'boolean', // For future extensibility
     MultipleChoice = 'multiple-choice', // For future extensibility
+    MultiSelect = 'multi-select', // For future extensibility
     Date = 'date', // For future extensibility  
     Rating = 'rating', // For future extensibility
     Dropdown = 'dropdown', // For future extensibility
@@ -24,5 +25,7 @@ export interface FormQuestion {
   dependancy?: QuestionDependency; // Optional dependency for conditional questions
   options?: string[]; // For multiple choice or dropdown questions
   required?: boolean; // Whether this question must be answered
+  ratingMin?: number; // Minimum rating value, if applicable
+  ratingMax?: number; // Maximum rating value, if applicable
 }
 

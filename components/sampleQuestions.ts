@@ -22,7 +22,7 @@ export const sampleQuestions: FormQuestion[] = [
   {
     id: 4,
     text: 'What is your favorite color?',
-    format: QuestionFormat.Dropdown,
+    format: QuestionFormat.MultipleChoice,
     options: ['Red', 'Blue', 'Green', 'Yellow'],
     required: false,
   },
