@@ -1,3 +1,18 @@
+export type FormOptions = {
+    showNavigationButtons?: boolean; // Whether to show navigation buttons
+    buttonOptions?: NavigationButtonOptions; // Options for navigation buttons
+    showProgress?: boolean; // Whether to show a progress bar
+    progressBarType: 'numberic' | 'perecentage' | 'progress-bar';
+    onFormComplete?: () => void; // Callback when form is completed
+}
+
+type NavigationButtonOptions = {
+    onNext?: () => void; // Callback for next button
+    onPrev?: () => void; // Callback for previous button
+    nextButtonText?: string; // Text for next button
+    prevButtonText?: string; // Text for previous button
+}
+
 export type FormQuestionAnswers = Record<number, string | number | boolean>;
 
 type FormQuestionAnswerValue = string | number | boolean;

@@ -2,7 +2,7 @@
 
 import React, { createContext, ReactNode, useContext, useMemo, useState } from 'react';
 import { runOnJS, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
-import { FormQuestion, FormQuestionAnswers } from '../types';
+import { FormOptions, FormQuestion, FormQuestionAnswers } from '../types';
 import { sampleQuestions } from '../sampleQuestions';
 
 interface FormContextType {
@@ -23,7 +23,14 @@ const FormContext = createContext<FormContextType | undefined>(undefined);
 
 const transformationDuration = 300;
 
-export const FormProvider = ({ children }: { children: ReactNode }) => {
+export const FormProvider = ({ options, children }: { options?: FormOptions; children: ReactNode; }) => {
+    const {
+        showNavigationButtons,
+        buttonOptions,
+        showProgress,
+        progressBarType,
+        onFormComplete
+    } = options || {};
     const questions = sampleQuestions; // Assuming sampleQuestions is imported from somewhere
     const [current, setCurrent] = useState(0);
     const [nextIndex, setNextIndex] = useState<number | null>(null);

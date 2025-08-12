@@ -5,6 +5,10 @@ import { FormProvider } from './FormContext';
 import FormNavigationButtons from './FormNavigationButtons';
 import FormQuestionsContainer from './FormQuestionsContainer';
 
+interface FormProps {
+	onSubmit?: () => void;
+}
+
 export default function Form() {
   return (
     <FormProvider>
