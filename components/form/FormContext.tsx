@@ -2,7 +2,7 @@
 
 import React, { createContext, ReactNode, useContext, useMemo, useState } from 'react';
 import { runOnJS, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
-import { FormOptions, FormQuestion, FormQuestionAnswers } from '../types';
+import { FormAnswerType, FormOptions, FormQuestion, FormQuestionAnswers } from '../types';
 import { sampleQuestions } from '../sampleQuestions';
 
 interface FormContextType {
@@ -17,24 +17,40 @@ interface FormContextType {
   setAnswer: (questionId: number, answer: string | number | boolean) => void;
   questions: FormQuestion[];
   inAnimation?: boolean; // Optional prop to indicate if an animation is in progress
+  options: FormOptions; // Options for the form
 }
 
 const FormContext = createContext<FormContextType | undefined>(undefined);
 
 const transformationDuration = 300;
 
-export const FormProvider = ({ options, children }: { options?: FormOptions; children: ReactNode; }) => {
+interface FormQuestionAnswersProps {
+    questions: FormQuestion[];
+    answers: FormQuestionAnswers;
+    onAnswerChange: (questionId: number, answer: FormAnswerType) => void;
+}
+
+interface FormProviderProps {
+    props: FormQuestionAnswersProps;
+    options?: FormOptions;
+    children: ReactNode;
+}
+
+export const FormProvider = ({ options, children, props }: FormProviderProps) => {
     const {
-        showNavigationButtons,
-        buttonOptions,
-        showProgress,
-        progressBarType,
-        onFormComplete
+        questions,
+        answers,
+        onAnswerChange
+    } = props;
+    const {
+        showNavigationButtons = true,
+        buttonOptions = {},
+        showProgress = false,
+        progressBarType = 'numeric',
+        onFormComplete = () => {}, // Default to no-op
     } = options || {};
-    const questions = sampleQuestions; // Assuming sampleQuestions is imported from somewhere
     const [current, setCurrent] = useState(0);
     const [nextIndex, setNextIndex] = useState<number | null>(null);
-    const [answers, setAnswers] = useState<FormQuestionAnswers>({});
     const [inAnimation, setInAnimation] = useState(false);
 
     const currentOpacity = useSharedValue(1);
@@ -72,7 +88,7 @@ export const FormProvider = ({ options, children }: { options?: FormOptions; chi
     };
 
     const setAnswer = (questionId: number, answer: string | number | boolean) => {
-        setAnswers((prev) => ({ ...prev, [questionId]: answer }));
+        onAnswerChange(questionId, answer);
     };
 
     const currentStyle = useAnimatedStyle(() => ({
@@ -106,7 +122,14 @@ export const FormProvider = ({ options, children }: { options?: FormOptions; chi
                 answers,
                 setAnswer,
                 questions: dependancyMetQuestions,
-                inAnimation
+                inAnimation,
+                options: {
+                    showNavigationButtons,
+                    buttonOptions,
+                    showProgress,
+                    progressBarType,
+                    onFormComplete, // Pass the callback to the context
+                }
             }}
         >
             {children}

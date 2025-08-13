@@ -2,7 +2,7 @@ export type FormOptions = {
     showNavigationButtons?: boolean; // Whether to show navigation buttons
     buttonOptions?: NavigationButtonOptions; // Options for navigation buttons
     showProgress?: boolean; // Whether to show a progress bar
-    progressBarType: 'numberic' | 'perecentage' | 'progress-bar';
+    progressBarType?: 'numeric' | 'perecentage' | 'progress-bar';
     onFormComplete?: () => void; // Callback when form is completed
 }
 
@@ -13,9 +13,11 @@ type NavigationButtonOptions = {
     prevButtonText?: string; // Text for previous button
 }
 
-export type FormQuestionAnswers = Record<number, string | number | boolean>;
+export type FormAnswerType = string | number | boolean;
 
-type FormQuestionAnswerValue = string | number | boolean;
+export type FormQuestionAnswers = Record<number, FormAnswerType>;
+
+type FormQuestionAnswerValue = FormAnswerType;
 
 type QuestionDependency = {
     questionId: number; // The ID of the question this depends on

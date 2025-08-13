@@ -4,20 +4,31 @@ import { StyleSheet, View } from 'react-native';
 import { FormProvider } from './FormContext';
 import FormNavigationButtons from './FormNavigationButtons';
 import FormQuestionsContainer from './FormQuestionsContainer';
+import { FormAnswerType, FormOptions, FormQuestion } from '../types';
 
 interface FormProps {
-	onSubmit?: () => void;
+	options?: FormOptions;
+	questions: FormQuestion[];
+	answers: Record<number, FormAnswerType>;
+	onAnswerChange: (questionId: number, answer: FormAnswerType) => void;
 }
 
-export default function Form() {
-  return (
-    <FormProvider>
-      <View style={styles.container}>
-        <FormQuestionsContainer />
-        <FormNavigationButtons />
-      </View>
-    </FormProvider>
-  );
+export default function Form(props: FormProps) {
+	return (
+		<FormProvider
+			props={{
+				questions: props.questions,
+				answers: props.answers,
+				onAnswerChange: props.onAnswerChange,
+			}}
+			options={props.options}
+		>
+			<View style={styles.container}>
+				<FormQuestionsContainer />
+				<FormNavigationButtons />
+			</View>
+		</FormProvider>
+	);
 }
 
 const styles = StyleSheet.create({
