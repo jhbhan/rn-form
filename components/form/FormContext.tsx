@@ -1,9 +1,6 @@
-
-
 import React, { createContext, ReactNode, useContext, useMemo, useState } from 'react';
 import { runOnJS, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import { FormAnswerType, FormOptions, FormQuestion, FormQuestionAnswers } from '../types';
-import { sampleQuestions } from '../sampleQuestions';
 
 interface FormContextType {
   current: number;
@@ -58,6 +55,14 @@ export const FormProvider = ({ options, children, props }: FormProviderProps) =>
     const nextOpacity = useSharedValue(0);
     const nextTranslateX = useSharedValue(0);
 
+    const dependancyMetQuestions = useMemo(() => {
+        return questions.filter(q => {
+            if (!q.dependancy) return true; // No dependency, always met
+            const { questionId, value } = q.dependancy;
+            return answers[questionId] === value; // Check if the dependency is met
+        });
+    }, [questions, answers]);
+
     const animate = (newIndex: number, dir: number) => {
         setInAnimation(true);
         setNextIndex(newIndex);
@@ -77,9 +82,20 @@ export const FormProvider = ({ options, children, props }: FormProviderProps) =>
         });
     };
 
+    const showCompleteForm = () => {
+        onFormComplete();
+        runOnJS(setInAnimation)(true); // Reset animation state
+        currentOpacity.value = withTiming(0, { duration: transformationDuration });
+        currentTranslateX.value = withTiming(-40, { duration: transformationDuration });
+        runOnJS(setInAnimation)(false); // Reset animation state
+    }
+
     const goToNext = () => {
-        // You may want to pass questions.length as prop or context
-        // For now, just allow increment
+        if (current + 1 >= dependancyMetQuestions.length) {
+            console.log('Form completed');
+            showCompleteForm(); // Call the completion callback
+            return;
+        }
         animate(current + 1, 1);
     };
 
@@ -100,14 +116,6 @@ export const FormProvider = ({ options, children, props }: FormProviderProps) =>
         opacity: nextOpacity.value,
         transform: [{ translateX: nextTranslateX.value }],
     }));
-
-    const dependancyMetQuestions = useMemo(() => {
-        return questions.filter(q => {
-            if (!q.dependancy) return true; // No dependency, always met
-            const { questionId, value } = q.dependancy;
-            return answers[questionId] === value; // Check if the dependency is met
-        });
-    }, [questions, answers]);
 
     return (
         <FormContext.Provider
