@@ -4,7 +4,8 @@ import { StyleSheet, View } from 'react-native';
 import { FormProvider } from './FormContext';
 import FormNavigationButtons from './FormNavigationButtons';
 import FormQuestionsContainer from './FormQuestionsContainer';
-import { FormAnswerType, FormOptions, FormQuestion } from '../types';
+import { FormAnswerType, FormOptions, FormQuestion } from '../../constants/types';
+import { COLORS } from '../../constants/styles';
 
 interface FormProps {
 	options?: FormOptions;
@@ -34,7 +35,7 @@ export default function Form(props: FormProps) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f3f4f6',
+    backgroundColor: COLORS.background,
     overflow: 'hidden',
     justifyContent: 'center',
     alignItems: 'center',

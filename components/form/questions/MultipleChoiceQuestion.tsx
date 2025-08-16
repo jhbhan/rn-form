@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { View, TouchableOpacity, Text } from 'react-native';
+import sharedStyles, { COLORS, SPACING } from '../../../constants/styles';
 
 export type MultipleChoiceQuestionProps = {
   value: string | null;
@@ -8,36 +9,19 @@ export type MultipleChoiceQuestionProps = {
 };
 
 export const MultipleChoiceQuestion = ({ value, onChange, options }: MultipleChoiceQuestionProps) => (
-  <View style={styles.row}>
+  <View style={[sharedStyles.row, { flexWrap: 'wrap', justifyContent: 'center', marginBottom: SPACING.md }] }>
     {options.map(option => (
       <TouchableOpacity
         key={option}
-        style={[styles.button, value === option && styles.selected]}
+        style={[
+          sharedStyles.buttonUnselected,
+          value === option && sharedStyles.buttonSecondarySelected,
+          { margin: SPACING.sm }
+        ]}
         onPress={() => onChange(option)}
       >
-        <Text>{option}</Text>
+        <Text style={sharedStyles.buttonSecondaryText}>{option}</Text>
       </TouchableOpacity>
     ))}
   </View>
 );
-
-const styles = StyleSheet.create({
-  row: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    marginBottom: 16,
-  },
-  button: {
-    borderWidth: 1,
-    borderColor: '#d1d5db',
-    borderRadius: 8,
-    padding: 12,
-    margin: 6,
-    backgroundColor: '#fff',
-  },
-  selected: {
-    backgroundColor: '#3b82f6',
-    borderColor: '#3b82f6',
-  },
-});

@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useFormContext } from './FormContext';
+import baseStyles from '../../constants/styles';
 
 export default function FormNavigationButtons() {
     const { current, goToPrev, goToNext, inAnimation, questions, options } = useFormContext();
@@ -16,18 +17,18 @@ export default function FormNavigationButtons() {
                 )
             }
             <TouchableOpacity
-                style={[styles.button, styles.backButton, current === 0 && styles.disabledButton]}
+                style={[baseStyles.buttonSecondary, current === 0 && styles.disabledButton]}
                 onPress={goToPrev}
                 disabled={current === 0 || inAnimation}
             >
-                <Text style={styles.buttonTextDark}>Back</Text>
+                <Text style={baseStyles.buttonSecondaryText}>Back</Text>
             </TouchableOpacity>
             <TouchableOpacity
-                style={[styles.button, styles.nextButton]}
+                style={[baseStyles.buttonPrimary]}
                 onPress={goToNext}
                 disabled={inAnimation}
             >
-                <Text style={styles.buttonTextLight}>
+                <Text style={baseStyles.buttonPrimaryText}>
                 {current === questions.length - 1 ? 'Finish' : 'Next'}
                 </Text>
             </TouchableOpacity>
@@ -38,22 +39,19 @@ export default function FormNavigationButtons() {
 const styles = StyleSheet.create({
   buttonRow: {
     position: 'absolute',
-    bottom: 50,
+    bottom: 40,
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '80%',
+    alignSelf: 'center',
+    zIndex: 10,
   },
   button: {
     borderRadius: 8,
     padding: 12,
     width: 96,
+    height: 40,
     alignItems: 'center',
-  },
-  backButton: {
-    backgroundColor: '#d1d5db',
-  },
-  nextButton: {
-    backgroundColor: '#3b82f6',
   },
   disabledButton: {
     opacity: 0.5,

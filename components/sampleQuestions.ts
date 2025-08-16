@@ -1,4 +1,4 @@
-import { FormQuestion, QuestionFormat } from './types';
+import { FormQuestion, QuestionFormat } from '../constants/types';
 
 export const sampleQuestions: FormQuestion[] = [
   {

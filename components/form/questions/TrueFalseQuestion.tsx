@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import baseStyle from '../../../constants/styles';
 
 export type TrueFalseQuestionProps = {
   value: boolean | null;
@@ -12,13 +13,13 @@ export const TrueFalseQuestion = ({ value, onChange }: TrueFalseQuestionProps) =
       style={[styles.button, value === true && styles.selected]}
       onPress={() => onChange(true)}
     >
-      <Text>True</Text>
+      <Text style={baseStyle.buttonPrimaryText}>True</Text>
     </TouchableOpacity>
     <TouchableOpacity
       style={[styles.button, value === false && styles.selected]}
       onPress={() => onChange(false)}
     >
-      <Text>False</Text>
+      <Text style={baseStyle.buttonPrimaryText}>False</Text>
     </TouchableOpacity>
   </View>
 );
@@ -30,15 +31,10 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   button: {
-    borderWidth: 1,
-    borderColor: '#d1d5db',
-    borderRadius: 8,
+    flex: 1,
     padding: 12,
     marginHorizontal: 8,
-    backgroundColor: '#fff',
+    ...baseStyle.buttonUnselected, // Use base styles for consistency
   },
-  selected: {
-    backgroundColor: '#3b82f6',
-    borderColor: '#3b82f6',
-  },
+  selected: baseStyle.buttonPrimary,
 });

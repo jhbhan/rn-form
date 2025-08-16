@@ -3,6 +3,7 @@ import { Dimensions, StyleSheet, Text, TextInput } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { useFormContext } from './FormContext';
 import { FormQuestion } from './FormQuestion';
+import baseStyles, { COLORS } from '../../constants/styles';
 
 const { width, height } = Dimensions.get('window');
 
@@ -45,15 +46,13 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: width,
     height: height,
-    padding: 24,
     justifyContent: 'center',
-    backgroundColor: '#fff',
+    padding: 24,
+    backgroundColor: COLORS.background,
   },
   question: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 16,
     textAlign: 'center',
+    ...baseStyles.heading,
   },
   input: {
     borderWidth: 1,

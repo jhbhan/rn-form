@@ -1,6 +1,6 @@
 import React, { createContext, ReactNode, useContext, useMemo, useState } from 'react';
 import { runOnJS, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
-import { FormAnswerType, FormOptions, FormQuestion, FormQuestionAnswers } from '../types';
+import { FormAnswerType, FormOptions, FormQuestion, FormQuestionAnswers } from '../../constants/types';
 
 interface FormContextType {
   current: number;
@@ -109,12 +109,12 @@ export const FormProvider = ({ options, children, props }: FormProviderProps) =>
 
     const currentStyle = useAnimatedStyle(() => ({
         opacity: currentOpacity.value,
-        transform: [{ translateX: currentTranslateX.value }],
+        transform: [{ translateX: currentTranslateX.value }]
     }));
 
     const nextStyle = useAnimatedStyle(() => ({
         opacity: nextOpacity.value,
-        transform: [{ translateX: nextTranslateX.value }],
+        transform: [{ translateX: nextTranslateX.value }]
     }));
 
     return (

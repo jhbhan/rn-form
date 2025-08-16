@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { FormQuestion as FormQuestionType } from '../types';
+import { FormQuestion as FormQuestionType } from '../../constants/types';
 import { useFormContext } from './FormContext';
 import { TextQuestion } from './questions/TextQuestion';
 import { NumberQuestion } from './questions/NumberQuestion';
