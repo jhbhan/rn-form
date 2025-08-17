@@ -12,6 +12,7 @@ interface FormProps {
 	questions: FormQuestion[];
 	answers: Record<number, FormAnswerType>;
 	onAnswerChange: (questionId: number, answer: FormAnswerType) => void;
+	onFormComplete: () => void; // Callback when form is completed
 }
 
 export default function Form(props: FormProps) {
@@ -21,6 +22,7 @@ export default function Form(props: FormProps) {
 				questions: props.questions,
 				answers: props.answers,
 				onAnswerChange: props.onAnswerChange,
+				onFormComplete: props.onFormComplete,
 			}}
 			options={props.options}
 		>

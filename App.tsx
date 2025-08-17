@@ -52,9 +52,7 @@ export default function App() {
 				questions={questionList}
 				answers={answers}
 				onAnswerChange={onAnswerChange}
-				options={{
-					onFormComplete: onFormComplete,
-				}}
+				onFormComplete={onFormComplete}
 			/>
 		</View>
 	);

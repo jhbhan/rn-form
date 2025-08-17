@@ -25,6 +25,7 @@ interface FormQuestionAnswersProps {
     questions: FormQuestion[];
     answers: FormQuestionAnswers;
     onAnswerChange: (questionId: number, answer: FormAnswerType) => void;
+    onFormComplete: () => void; // Callback when form is completed
 }
 
 interface FormProviderProps {
@@ -37,14 +38,14 @@ export const FormProvider = ({ options, children, props }: FormProviderProps) =>
     const {
         questions,
         answers,
-        onAnswerChange
+        onAnswerChange,
+        onFormComplete, // Default to no-op
     } = props;
     const {
         showNavigationButtons = true,
         buttonOptions = {},
         showProgress = false,
         progressBarType = 'numeric',
-        onFormComplete = () => {}, // Default to no-op
     } = options || {};
     const [current, setCurrent] = useState(0);
     const [nextIndex, setNextIndex] = useState<number | null>(null);
@@ -135,8 +136,7 @@ export const FormProvider = ({ options, children, props }: FormProviderProps) =>
                     showNavigationButtons,
                     buttonOptions,
                     showProgress,
-                    progressBarType,
-                    onFormComplete, // Pass the callback to the context
+                    progressBarType
                 }
             }}
         >

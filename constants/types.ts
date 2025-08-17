@@ -3,7 +3,6 @@ export type FormOptions = {
     buttonOptions?: NavigationButtonOptions; // Options for navigation buttons
     showProgress?: boolean; // Whether to show a progress bar
     progressBarType?: 'numeric' | 'perecentage' | 'progress-bar';
-    onFormComplete?: () => void; // Callback when form is completed
 }
 
 type NavigationButtonOptions = {
