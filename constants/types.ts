@@ -44,4 +44,3 @@ export interface FormQuestion {
   ratingMin?: number; // Minimum rating value, if applicable
   ratingMax?: number; // Maximum rating value, if applicable
 }
-

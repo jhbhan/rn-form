@@ -4,8 +4,11 @@ import { useFormContext } from './FormContext';
 import baseStyles from '../../constants/styles';
 
 export default function FormNavigationButtons() {
-    const { current, goToPrev, goToNext, inAnimation, questions, options } = useFormContext();
+    const { current, goToPrev, goToNext, inAnimation, questions, answers, options } = useFormContext();
     const { showProgress } = options;
+
+    const isQuestionRequired = questions[current]?.required || false;
+    const isNextDisabled = inAnimation || (isQuestionRequired && !answers[questions[current].id]);
 
     return (
         <View style={styles.buttonRow}>
@@ -24,9 +27,9 @@ export default function FormNavigationButtons() {
                 <Text style={baseStyles.buttonSecondaryText}>Back</Text>
             </TouchableOpacity>
             <TouchableOpacity
-                style={[baseStyles.buttonPrimary]}
+                style={[baseStyles.buttonPrimary, isNextDisabled && styles.disabledButton]}
                 onPress={goToNext}
-                disabled={inAnimation}
+                disabled={isNextDisabled}
             >
                 <Text style={baseStyles.buttonPrimaryText}>
                 {current === questions.length - 1 ? 'Finish' : 'Next'}
