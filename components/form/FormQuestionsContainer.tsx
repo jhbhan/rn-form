@@ -9,7 +9,6 @@ const { width, height } = Dimensions.get('window');
 
 export default function FormQuestionsContainer() {
   const { current, nextIndex, currentStyle, nextStyle, answers, setAnswer, questions } = useFormContext();
-  console.log(current);
   if (current === questions.length) {
     return null; // No more questions to display
   }
