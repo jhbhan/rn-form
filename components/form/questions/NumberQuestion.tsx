@@ -1,5 +1,6 @@
 import React from 'react';
-import { TextInput, StyleSheet } from 'react-native';
+import { TextInput } from 'react-native';
+import { inputStyles } from '../../../constants/styles/inputs';
 
 export type NumberQuestionProps = {
   value: string | number;
@@ -9,21 +10,10 @@ export type NumberQuestionProps = {
 
 export const NumberQuestion = ({ value, onChange, placeholder }: NumberQuestionProps) => (
   <TextInput
-    style={styles.input}
+    style={inputStyles.input}
     value={String(value)}
     onChangeText={onChange}
     placeholder={placeholder}
     keyboardType="numeric"
   />
 );
-
-const styles = StyleSheet.create({
-  input: {
-    borderWidth: 1,
-    borderColor: '#d1d5db',
-    backgroundColor: '#fff',
-    borderRadius: 8,
-    padding: 12,
-    marginBottom: 16,
-  },
-});

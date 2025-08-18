@@ -3,16 +3,20 @@ import { FormView } from './components/form/Form';
 import { sampleQuestions } from './components/sampleQuestions';
 import { useState } from 'react';
 import { FormAnswerType } from './constants/types';
-import baseStyle, { COLORS } from './constants/styles';
+import { COLORS } from './constants/styles/colors';
+import { buttonStyles, useButtonStyle } from './constants/styles/buttons';
+import { SPACING } from './constants/styles/spacing';
 
 export default function FormExample() {
     const questionList = sampleQuestions;
     const [isFormOpen, setIsFormOpen] = useState(false);
     const [isFormComplete, setIsFormComplete] = useState(false);
     const [answers, setAnswers] = useState<Record<number, FormAnswerType>>({});
+    
     const onAnswerChange = (questionId: number, answer: FormAnswerType) => {
         setAnswers((prev) => ({ ...prev, [questionId]: answer }));
     };
+    
     const onFormComplete = () => {
         setIsFormComplete(true);
         // Here you can handle the form submission, e.g., send to a server
@@ -29,11 +33,15 @@ export default function FormExample() {
         setIsFormComplete(false);
         setAnswers({});
     }
+
+    const openButtonStyle = useButtonStyle('primary');
+    const closeButtonStyle = useButtonStyle('secondary');
+
     if (!isFormOpen) {
         return (
             <View style={styles.container}>
-                <TouchableOpacity onPress={onFormOpen} style={baseStyle.buttonPrimary}>
-                    <Text style={baseStyle.buttonPrimaryText}>Open Form</Text>
+                <TouchableOpacity onPress={onFormOpen} style={openButtonStyle}>
+                    <Text style={buttonStyles.primaryText}>Open Form</Text>
                 </TouchableOpacity>
             </View>
         );
@@ -42,9 +50,9 @@ export default function FormExample() {
     if (isFormComplete) {
         return (
             <View style={styles.container}>
-                <Text style={baseStyle.buttonPrimaryText}>Form Completed!</Text>
-                <TouchableOpacity onPress={onFormClose} style={baseStyle.buttonSecondary}>
-                    <Text style={baseStyle.buttonSecondaryText}>Close Form</Text>
+                <Text style={buttonStyles.primaryText}>Form Completed!</Text>
+                <TouchableOpacity onPress={onFormClose} style={closeButtonStyle}>
+                    <Text style={buttonStyles.secondaryText}>Close Form</Text>
                 </TouchableOpacity>
             </View>
         );
@@ -74,6 +82,6 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     justifyContent: 'center',
     backgroundColor: COLORS.card,
-    padding: 24,
+    padding: SPACING.lg,
   },
 })

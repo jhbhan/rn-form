@@ -1,5 +1,6 @@
 import React from 'react';
-import { TextInput, StyleSheet } from 'react-native';
+import { TextInput } from 'react-native';
+import { inputStyles } from '../../../constants/styles/inputs';
 
 export type DateQuestionProps = {
   value: string;
@@ -9,19 +10,9 @@ export type DateQuestionProps = {
 
 export const DateQuestion = ({ value, onChange, placeholder }: DateQuestionProps) => (
   <TextInput
-    style={styles.input}
+    style={inputStyles.input}
     value={value}
     onChangeText={onChange}
     placeholder={placeholder || 'YYYY-MM-DD'}
   />
 );
-
-const styles = StyleSheet.create({
-  input: {
-    borderWidth: 1,
-    borderColor: '#d1d5db',
-    borderRadius: 8,
-    padding: 12,
-    marginBottom: 16,
-  },
-});

@@ -1,40 +1,43 @@
 import React from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
-import baseStyle from '../../../constants/styles';
+import { buttonStyles, useButtonStyle } from '../../../constants/styles/buttons';
+import { SPACING } from '../../../constants/styles/spacing';
 
 export type TrueFalseQuestionProps = {
   value: boolean | null;
   onChange: (val: boolean) => void;
 };
 
-export const TrueFalseQuestion = ({ value, onChange }: TrueFalseQuestionProps) => (
-  <View style={styles.row}>
-    <TouchableOpacity
-      style={[styles.button, value === true && styles.selected]}
-      onPress={() => onChange(true)}
-    >
-      <Text style={baseStyle.buttonPrimaryText}>True</Text>
-    </TouchableOpacity>
-    <TouchableOpacity
-      style={[styles.button, value === false && styles.selected]}
-      onPress={() => onChange(false)}
-    >
-      <Text style={baseStyle.buttonPrimaryText}>False</Text>
-    </TouchableOpacity>
-  </View>
-);
+export const TrueFalseQuestion = ({ value, onChange }: TrueFalseQuestionProps) => {
+  const trueButtonStyle = useButtonStyle(value === true ? 'primary' : 'unselected');
+  const falseButtonStyle = useButtonStyle(value === false ? 'primary' : 'unselected');
+  
+  return (
+    <View style={styles.row}>
+      <TouchableOpacity
+        style={[trueButtonStyle, styles.button]}
+        onPress={() => onChange(true)}
+      >
+        <Text style={buttonStyles.primaryText}>True</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={[falseButtonStyle, styles.button]}
+        onPress={() => onChange(false)}
+      >
+        <Text style={buttonStyles.primaryText}>False</Text>
+      </TouchableOpacity>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     justifyContent: 'center',
-    marginBottom: 16,
+    marginBottom: SPACING.md,
   },
   button: {
     flex: 1,
-    padding: 12,
-    marginHorizontal: 8,
-    ...baseStyle.buttonUnselected, // Use base styles for consistency
+    marginHorizontal: SPACING.sm,
   },
-  selected: baseStyle.buttonPrimary,
 });

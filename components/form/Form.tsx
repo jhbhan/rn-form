@@ -1,9 +1,11 @@
 
 import { Ionicons } from '@expo/vector-icons';
 import React, { useMemo } from 'react';
-import { Dimensions, GestureResponderEvent, PanResponder, PanResponderGestureState, StyleSheet, TouchableOpacity, View } from 'react-native';
-import Animated, { SlideInDown, SlideOutDown, useAnimatedStyle, useSharedValue, withSpring, withTiming } from 'react-native-reanimated';
+import { Dimensions, GestureResponderEvent, PanResponder, PanResponderGestureState, TouchableOpacity } from 'react-native';
+import Animated, { SlideInDown, SlideOutDown, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import { COLORS } from '../../constants/styles/colors';
+import { layoutStyles } from '../../constants/styles/layout';
+import { ANIMATION_CONFIG } from '../../constants/styles/animations';
 import { FormAnswerType, FormOptions, FormQuestion } from '../../constants/types';
 import { FormProvider, useFormContext } from './FormContext';
 import FormNavigationButtons from './FormNavigationButtons';
@@ -38,9 +40,9 @@ const FormComponent = (props: FormProps) => {
 				verticalPosition.value = gestureState.dy;
 			},
 			onPanResponderRelease: (evt: GestureResponderEvent, gestureState: PanResponderGestureState) => {
-				if (gestureState.dx < -50) {
+				if (gestureState.dx < -ANIMATION_CONFIG.horizontalSwipe) {
 					goToNext();
-				} else if (gestureState.dx > 50 && current > 0) {
+				} else if (gestureState.dx > ANIMATION_CONFIG.horizontalSwipe && current > 0) {
 					goToPrev();
 				}
 				console.log(verticalPosition.value);
@@ -49,7 +51,7 @@ const FormComponent = (props: FormProps) => {
 				if (verticalPosition.value > quarterWayDown && props.closeForm) {
 					props.closeForm();
 				} else {
-					verticalPosition.value = withTiming(0); // Reset position if not closing
+					verticalPosition.value = withTiming(0, { duration: ANIMATION_CONFIG.timingConfig.duration }); // Reset position if not closing
 				}
 			},
 		})
@@ -57,8 +59,8 @@ const FormComponent = (props: FormProps) => {
 	return (
 		<Animated.View
 			{...panResponder.panHandlers}
-			entering={SlideInDown.duration(400)}
-			exiting={SlideOutDown.duration(300)}
+			entering={SlideInDown.duration(ANIMATION_CONFIG.slideInDuration)}
+			exiting={SlideOutDown.duration(ANIMATION_CONFIG.slideOutDuration)}
 			style={[
 				layoutStyles.animatedViewContainer,
 				animatedStyle
@@ -91,5 +93,3 @@ export function FormView(props: FormProps) {
 		</FormProvider>
 	);
 }
-
-import { layoutStyles } from '../../constants/styles/layout';

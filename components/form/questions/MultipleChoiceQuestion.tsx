@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
-import sharedStyles, { COLORS, SPACING } from '../../../constants/styles';
+import { buttonStyles, useButtonStyle } from '../../../constants/styles/buttons';
+import { inputStyles } from '../../../constants/styles/inputs';
+import { SPACING } from '../../../constants/styles/spacing';
 
 export type MultipleChoiceQuestionProps = {
   value: string | null;
@@ -9,29 +11,28 @@ export type MultipleChoiceQuestionProps = {
 };
 
 export const MultipleChoiceQuestion = ({ value, onChange, options }: MultipleChoiceQuestionProps) => (
-    <View style={[styles.multipleChoiceContainer]}>
-        {options.map(option => (
-            <TouchableOpacity
-                key={option}
-                style={[
-                sharedStyles.buttonUnselected,
-                value === option && sharedStyles.buttonSecondarySelected,
-                { 
-                    margin: SPACING.sm,
-                    width: '100%'
-                }
-                ]}
-                onPress={() => onChange(option)}
-            >
-                <Text style={sharedStyles.buttonSecondaryText}>{option}</Text>
-            </TouchableOpacity>
-        ))}
-    </View>
+  <View style={inputStyles.multipleChoiceContainer}>
+    {options.map(option => {
+      const buttonStyle = useButtonStyle(
+        value === option ? 'primary' : 'unselected'
+      );
+      
+      return (
+        <TouchableOpacity
+          key={option}
+          style={[buttonStyle, styles.optionButton]}
+          onPress={() => onChange(option)}
+        >
+          <Text style={buttonStyles.primaryText}>{option}</Text>
+        </TouchableOpacity>
+      );
+    })}
+  </View>
 );
 
 const styles = StyleSheet.create({
-    multipleChoiceContainer: {
-        ...sharedStyles.row,
-        flexDirection: 'column'
-    }
-})
+  optionButton: {
+    margin: SPACING.sm,
+    width: '100%',
+  },
+});
