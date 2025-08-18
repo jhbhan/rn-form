@@ -3,7 +3,7 @@ import { Ionicons } from '@expo/vector-icons';
 import React, { useMemo } from 'react';
 import { Dimensions, GestureResponderEvent, PanResponder, PanResponderGestureState, StyleSheet, TouchableOpacity, View } from 'react-native';
 import Animated, { SlideInDown, SlideOutDown, useAnimatedStyle, useSharedValue, withSpring, withTiming } from 'react-native-reanimated';
-import { COLORS } from '../../constants/styles';
+import { COLORS } from '../../constants/styles/colors';
 import { FormAnswerType, FormOptions, FormQuestion } from '../../constants/types';
 import { FormProvider, useFormContext } from './FormContext';
 import FormNavigationButtons from './FormNavigationButtons';
@@ -60,12 +60,12 @@ const FormComponent = (props: FormProps) => {
 			entering={SlideInDown.duration(400)}
 			exiting={SlideOutDown.duration(300)}
 			style={[
-				styles.animatedViewContainer,
+				layoutStyles.animatedViewContainer,
 				animatedStyle
 			]}
 		>
 			<TouchableOpacity
-				style={styles.closeButton}
+				style={layoutStyles.closeButton}
 				onPress={props.closeForm}
 				hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
 			>
@@ -92,17 +92,4 @@ export function FormView(props: FormProps) {
 	);
 }
 
-const styles = StyleSheet.create({
-	animatedViewContainer: {
-		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center',
-	},
-	closeButton: {
-		position: 'absolute',
-		top: 20,
-		right: 0,
-		zIndex: 10,
-		padding: 8,
-	}
-});
+import { layoutStyles } from '../../constants/styles/layout';

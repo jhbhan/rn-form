@@ -1,5 +1,6 @@
 import React from 'react';
-import { TextInput, StyleSheet } from 'react-native';
+import { TextInput } from 'react-native';
+import { inputStyles } from '../../../constants/styles/inputs';
 
 export type TextQuestionProps = {
   value: string;
@@ -9,20 +10,9 @@ export type TextQuestionProps = {
 
 export const TextQuestion = ({ value, onChange, placeholder }: TextQuestionProps) => (
   <TextInput
-    style={styles.input}
+    style={inputStyles.input}
     value={value}
     onChangeText={onChange}
     placeholder={placeholder}
   />
 );
-
-const styles = StyleSheet.create({
-  input: {
-    borderWidth: 1,
-    borderColor: '#d1d5db',
-    backgroundColor: '#fff',
-    borderRadius: 8,
-    padding: 12,
-    marginBottom: 16,
-  },
-});

@@ -1,35 +1,13 @@
-import { StyleSheet } from "react-native";
+// Re-export from modular style system for backward compatibility
+export * from './styles/index';
 
-const COLORS = {
-  primary: "#A8D5BA", // pastel green
-  secondary: "#F9DCC4", // creamy peach
-  background: "#FFF8F0", // soft cream
-  card: "#FFFFFF",
-  textPrimary: "#3D3D3D",
-  textSecondary: "#7B7B7B",
-  border: "#E6E2DD",
-  success: "#B4E0C5", // pastel mint
-  danger: "#F7B2B7", // soft pink
-};
+// Legacy default export for backward compatibility
+import { StyleSheet } from 'react-native';
+import { COLORS } from './styles/colors';
+import { SPACING } from './styles/spacing';
+import { FONT_SIZES } from './styles/typography';
 
-const FONT_SIZES = {
-  xs: 12,
-  sm: 14,
-  md: 16,
-  lg: 20,
-  xl: 24,
-  xxl: 32,
-};
-
-const SPACING = {
-  xs: 4,
-  sm: 8,
-  md: 16,
-  lg: 24,
-  xl: 32,
-};
-
-export default StyleSheet.create({
+const legacyStyles = StyleSheet.create({
   // Layout
   screenContainer: {
     flex: 1,
@@ -90,7 +68,6 @@ export default StyleSheet.create({
     borderWidth: 1,
     borderColor: COLORS.border,
   },
-
   buttonSecondarySelected: {
     backgroundColor: COLORS.primary,
     borderColor: COLORS.primary,
@@ -100,7 +77,6 @@ export default StyleSheet.create({
     fontWeight: "bold",
     color: "#3D3D3D",
   },
-
   buttonUnselected: {
     backgroundColor: 'white',
     paddingVertical: SPACING.sm,
@@ -155,4 +131,4 @@ export default StyleSheet.create({
   },
 });
 
-export { COLORS, FONT_SIZES, SPACING };
+export default legacyStyles;
