@@ -21,7 +21,7 @@ interface FormProps {
 const FormComponent = (props: FormProps) => {
 	const { goToNext, goToPrev, current } = useFormContext();
 	const verticalPosition = useSharedValue(0);
-	const quarterWayDown = Dimensions.get('window').height * 3 / 4;
+	const quarterWayDown = Dimensions.get('window').height / 4;
 	// Animated style
 	const animatedStyle = useAnimatedStyle(() => ({
 		transform: [{ translateY: verticalPosition.value }],
@@ -44,6 +44,7 @@ const FormComponent = (props: FormProps) => {
 					goToPrev();
 				}
 				console.log(verticalPosition.value);
+				console.log(quarterWayDown);
 				// on close on down swipe
 				if (verticalPosition.value > quarterWayDown && props.closeForm) {
 					props.closeForm();

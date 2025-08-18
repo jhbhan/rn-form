@@ -15,7 +15,6 @@ export default function FormExample() {
     };
     const onFormComplete = () => {
         setIsFormComplete(true);
-        setIsFormOpen(false);
         // Here you can handle the form submission, e.g., send to a server
         // or save to local storage.
     }
@@ -27,12 +26,25 @@ export default function FormExample() {
 
     const onFormClose = () => {
         setIsFormOpen(false);
+        setIsFormComplete(false);
+        setAnswers({});
     }
     if (!isFormOpen) {
         return (
             <View style={styles.container}>
                 <TouchableOpacity onPress={onFormOpen} style={baseStyle.buttonPrimary}>
                     <Text style={baseStyle.buttonPrimaryText}>Open Form</Text>
+                </TouchableOpacity>
+            </View>
+        );
+    }
+
+    if (isFormComplete) {
+        return (
+            <View style={styles.container}>
+                <Text style={baseStyle.buttonPrimaryText}>Form Completed!</Text>
+                <TouchableOpacity onPress={onFormClose} style={baseStyle.buttonSecondary}>
+                    <Text style={baseStyle.buttonSecondaryText}>Close Form</Text>
                 </TouchableOpacity>
             </View>
         );
