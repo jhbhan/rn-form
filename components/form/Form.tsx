@@ -45,8 +45,6 @@ const FormComponent = (props: FormProps) => {
 				} else if (gestureState.dx > ANIMATION_CONFIG.horizontalSwipe && current > 0) {
 					goToPrev();
 				}
-				console.log(verticalPosition.value);
-				console.log(quarterWayDown);
 				// on close on down swipe
 				if (verticalPosition.value > quarterWayDown && props.closeForm) {
 					props.closeForm();
