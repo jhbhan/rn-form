@@ -9,6 +9,7 @@ export const ANIMATION_CONFIG = {
   timingConfig: {
     duration: 300,
   },
+  horizontalSwipe: 50, // Threshold for horizontal swipe to change question
 } as const;
 
 export const GESTURE_THRESHOLDS = {
