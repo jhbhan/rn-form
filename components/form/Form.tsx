@@ -37,7 +37,9 @@ const FormComponent = (props: FormProps) => {
 			},
 			onMoveShouldSetPanResponder: (_, gestureState: PanResponderGestureState) => true,
 			onPanResponderMove: (_, gestureState: PanResponderGestureState) => {
-				verticalPosition.value = gestureState.dy;
+        if (Math.abs(gestureState.dy) > Math.abs(gestureState.dx)) {
+				  verticalPosition.value = gestureState.dy;
+        }
 			},
 			onPanResponderRelease: (evt: GestureResponderEvent, gestureState: PanResponderGestureState) => {
 				if (gestureState.dx < -ANIMATION_CONFIG.horizontalSwipe) {
