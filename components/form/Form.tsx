@@ -56,6 +56,9 @@ const FormComponent = (props: FormProps) => {
 			},
 		})
 	, [goToNext, goToPrev, current, props.closeForm]);
+	// Get custom styles if provided
+	const customStyles = props.options?.styles || {};
+
 	return (
 		<Animated.View
 			{...panResponder.panHandlers}
@@ -63,7 +66,8 @@ const FormComponent = (props: FormProps) => {
 			exiting={SlideOutDown.duration(ANIMATION_CONFIG.slideOutDuration)}
 			style={[
 				layoutStyles.animatedViewContainer,
-				animatedStyle
+				animatedStyle,
+				customStyles.backgroundColor ? { backgroundColor: customStyles.backgroundColor } : undefined
 			]}
 		>
 			<TouchableOpacity

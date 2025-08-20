@@ -8,7 +8,19 @@ import baseStyles, { COLORS } from '../../constants/styles';
 const { width, height } = Dimensions.get('window');
 
 export default function FormQuestionsContainer() {
-  const { current, nextIndex, currentStyle, nextStyle, answers, setAnswer, questions } = useFormContext();
+  const { current, nextIndex, currentStyle, nextStyle, answers, setAnswer, questions, options } = useFormContext();
+  
+  // Get custom styles if provided
+  const customStyles = options?.styles || {};
+  
+  // Create custom question text styles
+  const questionTextStyle = [
+    styles.question,
+    customStyles.questionFontColor ? { color: customStyles.questionFontColor } : undefined,
+    customStyles.questionFontSize ? { fontSize: customStyles.questionFontSize } : undefined,
+    customStyles.questionFontWeight ? { fontWeight: customStyles.questionFontWeight } : undefined
+  ];
+  
   if (current === questions.length) {
     return null; // No more questions to display
   }
@@ -17,7 +29,7 @@ export default function FormQuestionsContainer() {
         <>
         {/* Current question */}
         <Animated.View style={[styles.fullScreen, currentStyle]}>
-            <Text style={styles.question}>{questions[current].text}</Text>
+            <Text style={questionTextStyle}>{questions[current].text}</Text>
             <FormQuestion
                 question={questions[current]}
                 answer={answers[questions[current].id]?.toString() || ''}
@@ -27,7 +39,7 @@ export default function FormQuestionsContainer() {
         {/* Next question (only rendered when animating) */}
         {nextIndex !== null && (
             <Animated.View style={[styles.fullScreen, nextStyle]}>
-            <Text style={styles.question}>{questions[nextIndex].text}</Text>
+            <Text style={questionTextStyle}>{questions[nextIndex].text}</Text>
             <FormQuestion
                 question={questions[nextIndex]}
                 answer={answers[questions[nextIndex].id]?.toString() || ''}
