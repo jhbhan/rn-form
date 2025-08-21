@@ -1,5 +1,5 @@
 import { Dimensions, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { FormView } from './components/form/Form';
+import { FlowForm } from './components/form/Form';
 import { sampleQuestions } from './components/sampleQuestions';
 import { useState } from 'react';
 import { FormAnswerType } from './constants/types';
@@ -60,7 +60,7 @@ export default function FormExample() {
 
     return (
         <View style={styles.container}>
-            <FormView
+            <FlowForm
                 questions={questionList}
                 answers={answers}
                 onAnswerChange={onAnswerChange}

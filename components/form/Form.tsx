@@ -11,13 +11,35 @@ import { FormProvider, useFormContext } from './FormContext';
 import FormNavigationButtons from './FormNavigationButtons';
 import FormQuestionsContainer from './FormQuestionsContainer';
 
-interface FormProps {
+export interface FormProps {
 	options?: FormOptions;
 	questions: FormQuestion[];
 	answers: Record<number, FormAnswerType>;
 	onAnswerChange: (questionId: number, answer: FormAnswerType) => void;
 	onFormComplete: () => void; // Callback when form is completed
 	closeForm?: () => void; // Optional prop to close the form
+}
+
+/**
+ * A wrapper component that provides the context for the form.
+ * All props are passed down to the FormComponent.
+ * @param props The props for the form.
+ * @returns The FormComponent wrapped in a FormProvider.
+ */
+export function FlowForm(props: FormProps) {
+	return (
+		<FormProvider
+			props={{
+				questions: props.questions,
+				answers: props.answers,
+				onAnswerChange: props.onAnswerChange,
+				onFormComplete: props.onFormComplete,
+			}}
+			options={props.options}
+		>
+			<FormComponent {...props} />
+		</FormProvider>
+	);
 }
 
 const FormComponent = (props: FormProps) => {
@@ -82,18 +104,3 @@ const FormComponent = (props: FormProps) => {
 		</Animated.View>
 	);
 };
-export function FormView(props: FormProps) {
-	return (
-		<FormProvider
-			props={{
-				questions: props.questions,
-				answers: props.answers,
-				onAnswerChange: props.onAnswerChange,
-				onFormComplete: props.onFormComplete,
-			}}
-			options={props.options}
-		>
-			<FormComponent {...props} />
-		</FormProvider>
-	);
-}
