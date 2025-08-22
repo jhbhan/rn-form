@@ -47,6 +47,9 @@ export const buttonStyles = StyleSheet.create({
     fontWeight: "bold",
     color: "#3D3D3D",
   },
+  fullWidth: {
+    flex: 1
+  }
 });
 
 export const useButtonStyle = (variant: 'primary' | 'secondary' | 'unselected', disabled?: boolean) => {

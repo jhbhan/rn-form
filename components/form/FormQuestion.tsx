@@ -69,9 +69,3 @@ export const FormQuestion = (props: FormQuestionProps) => {
         );
     }
 };
-
-const styles = StyleSheet.create({
-  container: {
-    // Add your styles here
-  }
-});

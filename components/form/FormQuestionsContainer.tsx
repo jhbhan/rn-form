@@ -1,11 +1,9 @@
 import React from 'react';
-import { Dimensions, StyleSheet, Text, TextInput } from 'react-native';
+import { Text } from 'react-native';
 import Animated from 'react-native-reanimated';
+import { layoutStyles, typographyStyles } from '../../constants/styles';
 import { useFormContext } from './FormContext';
 import { FormQuestion } from './FormQuestion';
-import baseStyles, { COLORS } from '../../constants/styles';
-
-const { width, height } = Dimensions.get('window');
 
 export default function FormQuestionsContainer() {
   const { current, nextIndex, currentStyle, nextStyle, answers, setAnswer, questions, options } = useFormContext();
@@ -15,7 +13,8 @@ export default function FormQuestionsContainer() {
   
   // Create custom question text styles
   const questionTextStyle = [
-    styles.question,
+    typographyStyles.heading,
+    typographyStyles.center,
     customStyles.questionFontColor ? { color: customStyles.questionFontColor } : undefined,
     customStyles.questionFontSize ? { fontSize: customStyles.questionFontSize } : undefined,
     customStyles.questionFontWeight ? { fontWeight: customStyles.questionFontWeight } : undefined
@@ -28,7 +27,7 @@ export default function FormQuestionsContainer() {
     return (
         <>
         {/* Current question */}
-        <Animated.View style={[styles.fullScreen, currentStyle]}>
+        <Animated.View style={[layoutStyles.fullScreen]}>
             <Text style={questionTextStyle}>{questions[current].text}</Text>
             <FormQuestion
                 question={questions[current]}
@@ -38,7 +37,7 @@ export default function FormQuestionsContainer() {
         </Animated.View>
         {/* Next question (only rendered when animating) */}
         {nextIndex !== null && (
-            <Animated.View style={[styles.fullScreen, nextStyle]}>
+            <Animated.View style={[layoutStyles.fullScreen, nextStyle]}>
             <Text style={questionTextStyle}>{questions[nextIndex].text}</Text>
             <FormQuestion
                 question={questions[nextIndex]}
@@ -51,25 +50,3 @@ export default function FormQuestionsContainer() {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  fullScreen: {
-    position: 'absolute',
-    width: width,
-    height: height,
-    justifyContent: 'center',
-    padding: 24,
-    backgroundColor: COLORS.background,
-  },
-  question: {
-    textAlign: 'center',
-    ...baseStyles.heading,
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: '#d1d5db',
-    borderRadius: 8,
-    padding: 12,
-    marginBottom: 16,
-  },
-});

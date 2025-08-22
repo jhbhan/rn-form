@@ -12,6 +12,9 @@ export const FONT_SIZES = {
 } as const;
 
 export const typographyStyles = StyleSheet.create({
+  center: {
+    textAlign: 'center',
+  },
   heading: {
     fontSize: FONT_SIZES.xl,
     fontWeight: "bold",

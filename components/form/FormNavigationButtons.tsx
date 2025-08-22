@@ -4,7 +4,7 @@ import { useFormContext } from './FormContext';
 import { buttonStyles, useButtonStyle } from '../../constants/styles/buttons';
 import { layoutStyles } from '../../constants/styles/layout';
 import { COLORS } from '../../constants/styles/colors';
-import { FONT_SIZES } from '../../constants/styles/typography';
+import { FONT_SIZES, typographyStyles } from '../../constants/styles/typography';
 
 export default function FormNavigationButtons() {
     const { current, goToPrev, goToNext, inAnimation, questions, answers, options } = useFormContext();
@@ -45,7 +45,8 @@ export default function FormNavigationButtons() {
             {
                 showProgress && (
                     <Text style={[
-                        styles.progressText, 
+                        typographyStyles.subheading,
+                        typographyStyles.center,
                         customStyles.fontColor ? { color: customStyles.fontColor } : undefined,
                         customStyles.fontSize ? { fontSize: customStyles.fontSize } : undefined,
                         customStyles.fontWeight ? { fontWeight: customStyles.fontWeight } : undefined
@@ -83,11 +84,3 @@ export default function FormNavigationButtons() {
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-  progressText: {
-    color: '#000',
-    fontWeight: '600',
-    marginBottom: 8
-  }
-});

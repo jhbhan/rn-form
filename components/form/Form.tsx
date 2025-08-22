@@ -3,9 +3,9 @@ import { Ionicons } from '@expo/vector-icons';
 import React, { useMemo } from 'react';
 import { Dimensions, GestureResponderEvent, PanResponder, PanResponderGestureState, TouchableOpacity } from 'react-native';
 import Animated, { SlideInDown, SlideOutDown, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
+import { ANIMATION_CONFIG } from '../../constants/styles/animations';
 import { COLORS } from '../../constants/styles/colors';
 import { layoutStyles } from '../../constants/styles/layout';
-import { ANIMATION_CONFIG } from '../../constants/styles/animations';
 import { FormAnswerType, FormOptions, FormQuestion } from '../../constants/types';
 import { FormProvider, useFormContext } from './FormContext';
 import FormNavigationButtons from './FormNavigationButtons';
@@ -26,7 +26,7 @@ export interface FormProps {
  * @param props The props for the form.
  * @returns The FormComponent wrapped in a FormProvider.
  */
-export function FlowForm(props: FormProps) {
+export function StepForm(props: FormProps) {
 	return (
 		<FormProvider
 			props={{
@@ -89,8 +89,7 @@ const FormComponent = (props: FormProps) => {
 			style={[
 				layoutStyles.animatedViewContainer,
 				animatedStyle,
-				customStyles.backgroundColor ? { backgroundColor: customStyles.backgroundColor } : undefined
-			]}
+				customStyles.backgroundColor ? { backgroundColor: 'red' } : {backgroundColor: 'red'}]}
 		>
 			<TouchableOpacity
 				style={layoutStyles.closeButton}

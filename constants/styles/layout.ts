@@ -1,6 +1,9 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 import { COLORS } from './colors';
 import { SPACING } from './spacing';
+
+const width = Dimensions.get('window').width;
+const height = Dimensions.get('window').height;
 
 export const layoutStyles = StyleSheet.create({
   screenContainer: {
@@ -29,8 +32,8 @@ export const layoutStyles = StyleSheet.create({
   },
   fullScreen: {
     position: 'absolute',
-    width: '100%',
-    height: '100%',
+    width: width,
+    height: height,
     justifyContent: 'center',
     padding: 24,
     backgroundColor: COLORS.background,
