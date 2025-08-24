@@ -24,9 +24,8 @@
     "build:watch": "babel src --out-dir dist --extensions .ts,.tsx,.js,.jsx --watch"
   },
   "peerDependencies": {
-    "react": "19.0.0",
-    "react-native": "0.79.5",
-    "react-native-reanimated": "^3.17.4"
+    "react": ">=17.0.0",
+    "react-native": ">=0.64.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.28.3",
@@ -38,6 +37,5 @@
     "install": "^0.13.0",
     "npm": "^11.5.2",
     "typescript": "~5.8.3"
-  },
-  "private": true
+  }
 }
