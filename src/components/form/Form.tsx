@@ -9,7 +9,7 @@ import { FormProvider, useFormContext } from './context/FormContext';
 import FormNavigationButtons from './FormNavigationButtons';
 import FormQuestionsContainer from './FormQuestionsContainer';
 
-export interface StepFormProps {
+export type StepFormProps = {
 	options?: FormOptions;
 	questions: FormQuestion[];
 	answers: Record<number, FormAnswerType>;
