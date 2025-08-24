@@ -1,5 +1,5 @@
 {
-  "name": "@jbhan/rn-form",
+  "name": "@jhbhan/rn-form",
   "version": "1.0.0",
   "description": "A React Native Form UI Component",
   "main": "dist/index.js",
