@@ -34,7 +34,7 @@ interface FormProviderProps {
     children: ReactNode;
 }
 
-export const FormProvider = ({ options, children, props }: FormProviderProps) => {
+export const FormProvider: React.FC<FormProviderProps> = ({ options, children, props }: FormProviderProps) => {
     const {
         questions,
         answers,

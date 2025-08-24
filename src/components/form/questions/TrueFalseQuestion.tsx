@@ -7,7 +7,7 @@ export type TrueFalseQuestionProps = {
   onChange: (val: boolean) => void;
 };
 
-export const TrueFalseQuestion = ({ value, onChange }: TrueFalseQuestionProps) => {
+export const TrueFalseQuestion: React.FC<TrueFalseQuestionProps> = ({ value, onChange }: TrueFalseQuestionProps) => {
   const trueButtonStyle = useButtonStyle(value === true ? 'primary' : 'unselected');
   const falseButtonStyle = useButtonStyle(value === false ? 'primary' : 'unselected');
   

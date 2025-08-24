@@ -7,7 +7,7 @@ export type RatingQuestionProps = {
   max?: number;
 };
 
-export const RatingQuestion = (props: RatingQuestionProps) => {
+export const RatingQuestion: React.FC<RatingQuestionProps> = (props: RatingQuestionProps) => {
     const {
         value = 0,
         onChange,

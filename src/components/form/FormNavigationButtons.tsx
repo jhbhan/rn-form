@@ -1,7 +1,8 @@
 import { Text, TouchableOpacity, View } from 'react-native';
 import { buttonStyles, layoutStyles, typographyStyles, useButtonStyle } from '../../constants/styles';
 import { useFormContext } from './context/FormContext';
-export default function FormNavigationButtons() {
+
+export const FormNavigationButtons: React.FC = () => {
     const { current, goToPrev, goToNext, inAnimation, questions, answers, options } = useFormContext();
     const { showProgress } = options;
 

@@ -7,7 +7,7 @@ export type NumberQuestionProps = {
   placeholder?: string;
 };
 
-export const NumberQuestion = ({ value, onChange, placeholder }: NumberQuestionProps) => (
+export const NumberQuestion: React.FC<NumberQuestionProps> = ({ value, onChange, placeholder }: NumberQuestionProps) => (
   <TextInput
     style={inputStyles.input}
     value={String(value)}

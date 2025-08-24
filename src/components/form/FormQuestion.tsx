@@ -13,7 +13,7 @@ type FormQuestionProps = {
   onChange: (val: string) => void;
 };
 
-export const FormQuestion = (props: FormQuestionProps) => {
+export const FormQuestion: React.FC<FormQuestionProps> = (props) => {
     const { question } = props;
     const { answers, setAnswer } = useFormContext();
     if (question.format === 'text') {

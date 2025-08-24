@@ -7,7 +7,7 @@ export type DateQuestionProps = {
   placeholder?: string;
 };
 
-export const DateQuestion = ({ value, onChange, placeholder }: DateQuestionProps) => (
+export const DateQuestion: React.FC<DateQuestionProps> = ({ value, onChange, placeholder }: DateQuestionProps) => (
   <TextInput
     style={inputStyles.input}
     value={value}

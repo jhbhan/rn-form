@@ -6,8 +6,8 @@ import Animated, { SlideInDown, SlideOutDown, useAnimatedStyle, useSharedValue, 
 import { ANIMATION_CONFIG, COLORS, layoutStyles } from '../../constants/styles';
 import { FormAnswerType, FormOptions, FormQuestion } from '../../constants/types';
 import { FormProvider, useFormContext } from './context/FormContext';
-import FormNavigationButtons from './FormNavigationButtons';
-import FormQuestionsContainer from './FormQuestionsContainer';
+import { FormNavigationButtons } from './FormNavigationButtons';
+import { FormQuestionsContainer } from './FormQuestionsContainer';
 
 export type StepFormProps = {
 	options?: FormOptions;
@@ -24,7 +24,7 @@ export type StepFormProps = {
  * @param props The props for the form.
  * @returns The FormComponent wrapped in a FormProvider.
  */
-export function StepForm(props: StepFormProps) {
+export const StepForm: React.FC<StepFormProps> = (props) => {
 	return (
 		<FormProvider
 			props={{
@@ -40,7 +40,7 @@ export function StepForm(props: StepFormProps) {
 	);
 }
 
-const FormComponent = (props: StepFormProps) => {
+const FormComponent: React.FC<StepFormProps> = (props) => {
 	const { goToNext, goToPrev, current } = useFormContext();
 	const verticalPosition = useSharedValue(0);
 	const quarterWayDown = Dimensions.get('window').height / 4;

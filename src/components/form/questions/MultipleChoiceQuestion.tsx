@@ -9,7 +9,7 @@ export type MultipleChoiceQuestionProps = {
   options: string[];
 };
 
-export const MultipleChoiceQuestion = ({ value, onChange, options }: MultipleChoiceQuestionProps) => (
+export const MultipleChoiceQuestion: React.FC<MultipleChoiceQuestionProps> = ({ value, onChange, options }: MultipleChoiceQuestionProps) => (
   <View style={inputStyles.multipleChoiceContainer}>
     {options.map(option => {
       const buttonStyle = useButtonStyle(

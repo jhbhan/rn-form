@@ -4,7 +4,7 @@ import { layoutStyles, typographyStyles } from '../../constants/styles';
 import { useFormContext } from './context/FormContext';
 import { FormQuestion } from './FormQuestion';
 
-export default function FormQuestionsContainer() {
+export const FormQuestionsContainer: React.FC = () => {
   const { current, nextIndex, currentStyle, nextStyle, answers, setAnswer, questions, options } = useFormContext();
   
   // Get custom styles if provided

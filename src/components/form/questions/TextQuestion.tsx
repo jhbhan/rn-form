@@ -8,7 +8,7 @@ export type TextQuestionProps = {
   placeholder?: string;
 };
 
-export const TextQuestion = ({ value, onChange, placeholder }: TextQuestionProps) => {
+export const TextQuestion: React.FC<TextQuestionProps> = ({ value, onChange, placeholder }: TextQuestionProps) => {
   const { options } = useFormContext();
   const customStyles = options?.styles || {};
   
