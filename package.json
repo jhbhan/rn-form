@@ -19,9 +19,9 @@
   ],
   "scripts": {
     "build": "npm run build:js && npm run build:types",
-    "build:js": "babel src --out-dir dist --extensions .js,.jsx,.ts,.tsx",
+    "build:js": "babel src --out-dir dist --extensions .ts,.tsx,.js,.jsx",
     "build:types": "tsc --emitDeclarationOnly",
-    "build:watch": "babel src --out-dir dist --extensions .js,.jsx,.ts,.tsx --watch"
+    "build:watch": "babel src --out-dir dist --extensions .ts,.tsx,.js,.jsx --watch"
   },
   "peerDependencies": {
     "react": "19.0.0",
