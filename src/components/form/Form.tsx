@@ -1,7 +1,6 @@
 
-import { Ionicons } from '@expo/vector-icons';
-import { useMemo } from 'react';
-import { Dimensions, GestureResponderEvent, PanResponder, PanResponderGestureState, TouchableOpacity } from 'react-native';
+import React, { useMemo } from 'react';
+import { Dimensions, GestureResponderEvent, PanResponder, PanResponderGestureState, TouchableOpacity, Text } from 'react-native';
 import Animated, { SlideInDown, SlideOutDown, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import { ANIMATION_CONFIG, COLORS, layoutStyles } from '../../constants/styles';
 import { FormAnswerType, FormOptions, FormQuestion } from '../../constants/types';
@@ -94,7 +93,11 @@ const FormComponent: React.FC<StepFormProps> = (props) => {
 				onPress={props.closeForm}
 				hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
 			>
-				<Ionicons name="close" size={28} color={COLORS.primary} />
+				<Text 
+					style={{ color: COLORS.primary, fontSize: 24 }}
+				>
+					X
+				</Text>
 			</TouchableOpacity>
 			<FormQuestionsContainer />
 			<FormNavigationButtons />

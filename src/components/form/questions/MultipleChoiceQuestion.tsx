@@ -1,3 +1,4 @@
+import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { buttonStyles, useButtonStyle } from '../../../constants/styles/buttons';
 import { inputStyles } from '../../../constants/styles/inputs';

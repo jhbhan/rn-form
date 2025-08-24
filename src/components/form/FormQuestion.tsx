@@ -1,3 +1,4 @@
+import React from 'react';
 import { FormQuestion as FormQuestionType } from '../../constants/types';
 import { useFormContext } from './context/FormContext';
 import { DateQuestion } from './questions/DateQuestion';

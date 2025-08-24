@@ -1,3 +1,4 @@
+import React from 'react';
 import { TextInput } from 'react-native';
 import { inputStyles } from '../../../constants/styles/inputs';
 import { useFormContext } from '../context/FormContext';

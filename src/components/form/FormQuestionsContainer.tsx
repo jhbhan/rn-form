@@ -1,3 +1,4 @@
+import React from 'react';
 import { Text } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { layoutStyles, typographyStyles } from '../../constants/styles';
