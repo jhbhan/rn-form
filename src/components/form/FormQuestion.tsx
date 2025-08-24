@@ -1,13 +1,11 @@
-import React from 'react';
-import { View, StyleSheet } from 'react-native';
 import { FormQuestion as FormQuestionType } from '../../constants/types';
-import { useFormContext } from './FormContext';
-import { TextQuestion } from './questions/TextQuestion';
-import { NumberQuestion } from './questions/NumberQuestion';
+import { useFormContext } from './context/FormContext';
 import { DateQuestion } from './questions/DateQuestion';
-import { TrueFalseQuestion } from './questions/TrueFalseQuestion';
 import { MultipleChoiceQuestion } from './questions/MultipleChoiceQuestion';
+import { NumberQuestion } from './questions/NumberQuestion';
 import { RatingQuestion } from './questions/RatingQuestion';
+import { TextQuestion } from './questions/TextQuestion';
+import { TrueFalseQuestion } from './questions/TrueFalseQuestion';
 
 type FormQuestionProps = {
   question: FormQuestionType;

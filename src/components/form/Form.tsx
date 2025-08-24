@@ -1,17 +1,15 @@
 
 import { Ionicons } from '@expo/vector-icons';
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { Dimensions, GestureResponderEvent, PanResponder, PanResponderGestureState, TouchableOpacity } from 'react-native';
 import Animated, { SlideInDown, SlideOutDown, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
-import { ANIMATION_CONFIG } from '../../constants/styles/animations';
-import { COLORS } from '../../constants/styles/colors';
-import { layoutStyles } from '../../constants/styles/layout';
+import { ANIMATION_CONFIG, COLORS, layoutStyles } from '../../constants/styles';
 import { FormAnswerType, FormOptions, FormQuestion } from '../../constants/types';
-import { FormProvider, useFormContext } from './FormContext';
+import { FormProvider, useFormContext } from './context/FormContext';
 import FormNavigationButtons from './FormNavigationButtons';
 import FormQuestionsContainer from './FormQuestionsContainer';
 
-export interface FormProps {
+export interface StepFormProps {
 	options?: FormOptions;
 	questions: FormQuestion[];
 	answers: Record<number, FormAnswerType>;
@@ -26,7 +24,7 @@ export interface FormProps {
  * @param props The props for the form.
  * @returns The FormComponent wrapped in a FormProvider.
  */
-export function StepForm(props: FormProps) {
+export function StepForm(props: StepFormProps) {
 	return (
 		<FormProvider
 			props={{
@@ -42,7 +40,7 @@ export function StepForm(props: FormProps) {
 	);
 }
 
-const FormComponent = (props: FormProps) => {
+const FormComponent = (props: StepFormProps) => {
 	const { goToNext, goToPrev, current } = useFormContext();
 	const verticalPosition = useSharedValue(0);
 	const quarterWayDown = Dimensions.get('window').height / 4;

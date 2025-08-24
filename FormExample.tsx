@@ -1,11 +1,11 @@
 import { Dimensions, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { StepForm } from './components/form/Form';
 import { sampleQuestions } from './components/sampleQuestions';
 import { useState } from 'react';
-import { FormAnswerType } from './constants/types';
-import { COLORS } from './constants/styles/colors';
-import { buttonStyles, useButtonStyle } from './constants/styles/buttons';
-import { SPACING } from './constants/styles/spacing';
+import { FormAnswerType } from './src/constants/types';
+import { COLORS } from './src/constants/styles/colors';
+import { buttonStyles, useButtonStyle } from './src/constants/styles/buttons';
+import { SPACING } from './src/constants/styles/spacing';
+import {StepForm} from './src/components/form/Form';
 
 export default function FormExample() {
     const questionList = sampleQuestions;

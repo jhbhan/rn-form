@@ -1,8 +1,7 @@
-import React from 'react';
 import { Text } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { layoutStyles, typographyStyles } from '../../constants/styles';
-import { useFormContext } from './FormContext';
+import { useFormContext } from './context/FormContext';
 import { FormQuestion } from './FormQuestion';
 
 export default function FormQuestionsContainer() {

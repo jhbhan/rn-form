@@ -1,6 +1,6 @@
-import React, { createContext, ReactNode, useContext, useMemo, useState } from 'react';
+import { createContext, ReactNode, useContext, useMemo, useState } from 'react';
 import { runOnJS, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
-import { FormAnswerType, FormOptions, FormQuestion, FormQuestionAnswers } from '../../constants/types';
+import { FormAnswerType, FormOptions, FormQuestion, FormQuestionAnswers } from '../../../constants/types';
 
 interface FormContextType {
   current: number;

@@ -1,5 +1,4 @@
-import React from 'react';
-import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { buttonStyles, useButtonStyle } from '../../../constants/styles/buttons';
 import { SPACING } from '../../../constants/styles/spacing';
 
