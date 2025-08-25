@@ -21,15 +21,6 @@ yarn add @jhbhan/rn-form
 import React from 'react';
 import { StepForm } from '@jhbhan/rn-form';
 
-const questions = [
-  { type: 'text', name: 'name', label: 'What is your name?' },
-  { type: 'number', name: 'age', label: 'How old are you?' },
-  { type: 'multipleChoice', name: 'color', label: 'Favorite color?', options: ['Red', 'Blue', 'Green'] },
-  { type: 'rating', name: 'satisfaction', label: 'How satisfied are you?', scale: 5 },
-  { type: 'date', name: 'dob', label: 'Date of Birth' },
-  { type: 'trueFalse', name: 'subscribe', label: 'Subscribe to newsletter?' },
-];
-
 export default function FormExample() {
     const questionList = sampleQuestions;
     const [isFormOpen, setIsFormOpen] = useState(false);
@@ -57,13 +48,10 @@ export default function FormExample() {
         setAnswers({});
     }
 
-    const openButtonStyle = useButtonStyle('primary');
-    const closeButtonStyle = useButtonStyle('secondary');
-
     if (!isFormOpen) {
         return (
             <View style={styles.container}>
-                <TouchableOpacity onPress={onFormOpen} style={openButtonStyle}>
+                <TouchableOpacity onPress={onFormOpen}>
                     <Text style={buttonStyles.primaryText}>Open Form</Text>
                 </TouchableOpacity>
             </View>
@@ -74,7 +62,7 @@ export default function FormExample() {
         return (
             <View style={styles.container}>
                 <Text style={buttonStyles.primaryText}>Form Completed!</Text>
-                <TouchableOpacity onPress={onFormClose} style={closeButtonStyle}>
+                <TouchableOpacity onPress={onFormClose}>
                     <Text style={buttonStyles.secondaryText}>Close Form</Text>
                 </TouchableOpacity>
             </View>
@@ -97,12 +85,14 @@ export default function FormExample() {
 
 ## Question Types
 
-- **TextQuestion**: Free-form text input
-- **NumberQuestion**: Numeric input
-- **MultipleChoiceQuestion**: Select one from multiple options
-- **RatingQuestion**: Star rating
-- **DateQuestion**: Date picker (not implemented yet)
-- **TrueFalseQuestion**: Boolean (yes/no, true/false)
+- **Text**: Free-form text input
+- **Number**: Numeric input
+- **TrueFalse**: Boolean (yes/no, true/false)
+- **MultipleChoice**: Select one from multiple options
+- **Rating**: Star rating
+- **MultiSelect**: Select one from multiple options (not implemented yet)
+- **Date**: Date picker (not implemented yet)
+- **Dropdown**: (not implemented yet)
 
 ## Types
 
@@ -110,11 +100,11 @@ export default function FormExample() {
 export enum QuestionFormat {
     Text = 'text',
     Number = 'number',
-    TrueFalse = 'boolean', // For future extensibility
-    MultipleChoice = 'multiple-choice', // For future extensibility
+    TrueFalse = 'boolean',
+    MultipleChoice = 'multiple-choice',
+    Rating = 'rating',
     MultiSelect = 'multi-select', // For future extensibility
     Date = 'date', // For future extensibility  
-    Rating = 'rating', // For future extensibility
     Dropdown = 'dropdown', // For future extensibility
 }
 
