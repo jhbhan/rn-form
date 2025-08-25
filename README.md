@@ -1,6 +1,6 @@
 # rn-form
 
-A flexible and customizable React Native form library for building multi-step forms with various question types, navigation, and context management.
+A flexible and customizable React Native form library for building multi-step forms with various question types.
 
 ## Features
 - Multi-step form navigation
