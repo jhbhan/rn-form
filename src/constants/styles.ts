@@ -7,7 +7,7 @@ import { COLORS } from './styles/colors';
 import { SPACING } from './styles/spacing';
 import { FONT_SIZES } from './styles/typography';
 
-const legacyStyles = StyleSheet.create({
+const defaultStyles = StyleSheet.create({
   // Layout
   screenContainer: {
     flex: 1,
@@ -131,4 +131,4 @@ const legacyStyles = StyleSheet.create({
   },
 });
 
-export default legacyStyles;
+export default defaultStyles;
