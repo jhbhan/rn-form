@@ -20,7 +20,7 @@
     "component"
   ],
   "scripts": {
-    "publish": "npm run build && npm version patch && npm publish --access public",
+    "npm-pub": "npm run build && npm version patch && npm publish --access public",
     "build": "npm run build:js && npm run build:types",
     "build:js": "babel src --out-dir dist --extensions .ts,.tsx,.js,.jsx",
     "build:types": "tsc --emitDeclarationOnly",
