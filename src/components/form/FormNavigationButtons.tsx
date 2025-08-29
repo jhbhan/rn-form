@@ -1,11 +1,13 @@
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
-import { buttonStyles, layoutStyles, typographyStyles, useButtonStyle } from '../../constants/styles';
+import { layoutStyles } from '../../constants/styles';
 import { useFormContext } from './context/FormContext';
+import { useTheme } from './context/ThemeContext';
 
 export const FormNavigationButtons: React.FC = () => {
     const { current, goToPrev, goToNext, inAnimation, questions, answers, options } = useFormContext();
     const { showProgress } = options;
+    const { themeStyle } = useTheme();
 
     const isQuestionRequired = questions[current]?.required || false;
     const isNextDisabled = inAnimation || (isQuestionRequired && !answers[questions[current].id]);
@@ -14,39 +16,16 @@ export const FormNavigationButtons: React.FC = () => {
     // Apply custom styles if provided
     const customStyles = options?.styles || {};
     
-    // Create custom button styles
-    const customButtonStyle = {
-        backgroundColor: customStyles.buttonBackgroundColor,
-        borderRadius: customStyles.buttonBorderRadius,
-        padding: customStyles.buttonPadding
-    };
-    
-    // Create custom button text styles
-    const customButtonTextStyle = {
-        color: customStyles.buttonTextColor,
-        fontSize: customStyles.buttonFontSize
-    };
-    
-    const prevButtonStyle = [
-        ...useButtonStyle('secondary', current === 0 || inAnimation),
-        customStyles.buttonBackgroundColor && customButtonStyle
-    ];
-    
-    const nextButtonStyle = [
-        ...useButtonStyle('primary', isNextDisabled),
-        customStyles.buttonBackgroundColor && customButtonStyle
-    ];
+    const prevButtonStyle = themeStyle.secondaryButton;
+    const nextButtonStyle = themeStyle.primaryButton;
 
     return (
         <View style={layoutStyles.buttonRow}>
             {
                 showProgress && (
                     <Text style={[
-                        typographyStyles.subheading,
-                        typographyStyles.center,
-                        customStyles.fontColor ? { color: customStyles.fontColor } : undefined,
-                        customStyles.fontSize ? { fontSize: customStyles.fontSize } : undefined,
-                        customStyles.fontWeight ? { fontWeight: customStyles.fontWeight } : undefined
+                        themeStyle.subheading,
+                        themeStyle.center
                     ]}>
                         {current + 1} / {questions.length}
                     </Text>
@@ -57,11 +36,7 @@ export const FormNavigationButtons: React.FC = () => {
                 onPress={goToPrev}
                 disabled={current === 0 || inAnimation}
             >
-                <Text style={[
-                    buttonStyles.secondaryText,
-                    customStyles.buttonTextColor ? { color: customStyles.buttonTextColor } : undefined,
-                    customStyles.buttonFontSize ? { fontSize: customStyles.buttonFontSize } : undefined
-                ]}>
+                <Text style={themeStyle.secondaryButtonText}>
                     {options?.buttonOptions?.prevButtonText || 'Back'}
                 </Text>
             </TouchableOpacity>
@@ -70,11 +45,7 @@ export const FormNavigationButtons: React.FC = () => {
                 onPress={goToNext}
                 disabled={isNextDisabled}
             >
-                <Text style={[
-                    buttonStyles.primaryText,
-                    customStyles.buttonTextColor ? { color: customStyles.buttonTextColor } : undefined,
-                    customStyles.buttonFontSize ? { fontSize: customStyles.buttonFontSize } : undefined
-                ]}>
+                <Text style={themeStyle.primaryButtonText}>
                     {isLastQuestion ? 'Finish' : (options?.buttonOptions?.nextButtonText || 'Next')}
                 </Text>
             </TouchableOpacity>

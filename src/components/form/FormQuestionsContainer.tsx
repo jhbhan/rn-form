@@ -1,23 +1,18 @@
 import React from 'react';
 import { Text } from 'react-native';
 import Animated from 'react-native-reanimated';
-import { layoutStyles, typographyStyles } from '../../constants/styles';
+import { layoutStyles } from '../../constants/styles';
 import { useFormContext } from './context/FormContext';
 import { FormQuestion } from './FormQuestion';
+import { useTheme } from './context/ThemeContext';
 
 export const FormQuestionsContainer: React.FC = () => {
-  const { current, nextIndex, currentStyle, nextStyle, answers, setAnswer, questions, options } = useFormContext();
-  
-  // Get custom styles if provided
-  const customStyles = options?.styles || {};
-  
+  const { current, nextIndex, nextStyle, answers, setAnswer, questions, options } = useFormContext();
+  const { themeStyle } = useTheme();
   // Create custom question text styles
   const questionTextStyle = [
-    typographyStyles.heading,
-    typographyStyles.center,
-    customStyles.questionFontColor ? { color: customStyles.questionFontColor } : undefined,
-    customStyles.questionFontSize ? { fontSize: customStyles.questionFontSize } : undefined,
-    customStyles.questionFontWeight ? { fontWeight: customStyles.questionFontWeight } : undefined
+    themeStyle.heading,
+    themeStyle.center,
   ];
   
   if (current === questions.length) {

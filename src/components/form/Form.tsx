@@ -2,11 +2,12 @@
 import React, { useMemo } from 'react';
 import { Dimensions, GestureResponderEvent, PanResponder, PanResponderGestureState, TouchableOpacity, Text } from 'react-native';
 import Animated, { SlideInDown, SlideOutDown, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
-import { ANIMATION_CONFIG, COLORS, layoutStyles } from '../../constants/styles';
+import { ANIMATION_CONFIG, layoutStyles } from '../../constants/styles';
 import { FormAnswerType, FormOptions, FormQuestion } from '../../constants/types';
 import { FormProvider, useFormContext } from './context/FormContext';
 import { FormNavigationButtons } from './FormNavigationButtons';
 import { FormQuestionsContainer } from './FormQuestionsContainer';
+import { useTheme } from './context/ThemeContext';
 
 export type StepFormProps = {
 	options?: FormOptions;
@@ -41,6 +42,7 @@ export const StepForm: React.FC<StepFormProps> = (props) => {
 
 const FormComponent: React.FC<StepFormProps> = (props) => {
 	const { goToNext, goToPrev, current } = useFormContext();
+	const { themeStyle } = useTheme()
 	const verticalPosition = useSharedValue(0);
 	const quarterWayDown = Dimensions.get('window').height / 4;
 	// Animated style
@@ -76,7 +78,6 @@ const FormComponent: React.FC<StepFormProps> = (props) => {
 		})
 	, [goToNext, goToPrev, current, props.closeForm]);
 	// Get custom styles if provided
-	const customStyles = props.options?.styles || {};
 
 	return (
 		<Animated.View
@@ -85,8 +86,9 @@ const FormComponent: React.FC<StepFormProps> = (props) => {
 			exiting={SlideOutDown.duration(ANIMATION_CONFIG.slideOutDuration)}
 			style={[
 				layoutStyles.animatedViewContainer,
-				animatedStyle,
-				customStyles.backgroundColor ? { backgroundColor: 'red' } : {backgroundColor: 'red'}]}
+				themeStyle.screenContainer,
+				animatedStyle
+			]}
 		>
 			<TouchableOpacity
 				style={layoutStyles.closeButton}
@@ -94,7 +96,7 @@ const FormComponent: React.FC<StepFormProps> = (props) => {
 				hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
 			>
 				<Text 
-					style={{ color: COLORS.primary, fontSize: 24 }}
+					style={themeStyle.badgeText}
 				>
 					X
 				</Text>

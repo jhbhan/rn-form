@@ -1,31 +1,7 @@
+import { ColorStyle } from "./styles";
+
 export interface FormStyles {
-    // General form styles
-    backgroundColor?: string;
-    
-    // Text styles
-    fontColor?: string;
-    fontSize?: number;
-    fontStyle?: 'normal' | 'italic';
-    fontWeight?: 'normal' | 'bold' | '100' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | '900';
-    
-    // Button styles
-    buttonBackgroundColor?: string;
-    buttonTextColor?: string;
-    buttonFontSize?: number;
-    buttonBorderRadius?: number;
-    buttonPadding?: number;
-    
-    // Question styles
-    questionFontColor?: string;
-    questionFontSize?: number;
-    questionFontWeight?: 'normal' | 'bold' | '100' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | '900';
-    
-    // Input styles
-    inputBackgroundColor?: string;
-    inputTextColor?: string;
-    inputBorderColor?: string;
-    inputBorderWidth?: number;
-    inputBorderRadius?: number;
+    colors: ColorStyle
 }
 
 export type FormOptions = {

@@ -46,7 +46,6 @@ export const FormProvider: React.FC<FormProviderProps> = ({ options, children, p
         buttonOptions = {},
         showProgress = false,
         progressBarType = 'numeric',
-        styles = {},
     } = options || {};
     const [current, setCurrent] = useState(0);
     const [nextIndex, setNextIndex] = useState<number | null>(null);
@@ -137,8 +136,7 @@ export const FormProvider: React.FC<FormProviderProps> = ({ options, children, p
                     showNavigationButtons,
                     buttonOptions,
                     showProgress,
-                    progressBarType,
-                    styles
+                    progressBarType
                 }
             }}
         >

@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
-import { COLORS } from './colors';
 import { SPACING } from './spacing';
+import { ColorStyle } from './colors';
 
 export const FONT_SIZES = {
   xs: 12,
@@ -11,30 +11,31 @@ export const FONT_SIZES = {
   xxl: 32,
 } as const;
 
-export const typographyStyles = StyleSheet.create({
+export const createTypographyStyles = (colors: ColorStyle) => {
+  return StyleSheet.create({
   center: {
     textAlign: 'center',
   },
   heading: {
     fontSize: FONT_SIZES.xl,
     fontWeight: "bold",
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
     marginBottom: SPACING.sm,
   },
   subheading: {
     fontSize: FONT_SIZES.lg,
     fontWeight: "600",
-    color: COLORS.textSecondary,
+    color: colors.textSecondary,
     marginBottom: SPACING.sm,
   },
   bodyText: {
     fontSize: FONT_SIZES.md,
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
   },
   smallText: {
     fontSize: FONT_SIZES.sm,
-    color: COLORS.textSecondary,
+    color: colors.textSecondary,
   },
-});
+})};
 
 export type FontSizeKey = keyof typeof FONT_SIZES;

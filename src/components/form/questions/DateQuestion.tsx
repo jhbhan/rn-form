@@ -1,6 +1,6 @@
 import React from 'react';
 import { TextInput } from 'react-native';
-import { inputStyles } from '../../../constants/styles/inputs';
+import { useTheme } from '../context/ThemeContext';
 
 export type DateQuestionProps = {
   value: string;
@@ -8,11 +8,14 @@ export type DateQuestionProps = {
   placeholder?: string;
 };
 
-export const DateQuestion: React.FC<DateQuestionProps> = ({ value, onChange, placeholder }: DateQuestionProps) => (
-  <TextInput
-    style={inputStyles.input}
-    value={value}
-    onChangeText={onChange}
-    placeholder={placeholder || 'YYYY-MM-DD'}
-  />
-);
+export const DateQuestion: React.FC<DateQuestionProps> = ({ value, onChange, placeholder }: DateQuestionProps) => {
+  const { themeStyle } = useTheme();
+  return (
+    <TextInput
+      style={themeStyle.input}
+      value={value}
+      onChangeText={onChange}
+      placeholder={placeholder || 'YYYY-MM-DD'}
+    />
+  );
+};

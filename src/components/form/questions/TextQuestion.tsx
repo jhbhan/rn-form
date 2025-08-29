@@ -1,7 +1,6 @@
 import React from 'react';
 import { TextInput } from 'react-native';
-import { inputStyles } from '../../../constants/styles/inputs';
-import { useFormContext } from '../context/FormContext';
+import { useTheme } from '../context/ThemeContext';
 
 export type TextQuestionProps = {
   value: string;
@@ -10,22 +9,10 @@ export type TextQuestionProps = {
 };
 
 export const TextQuestion: React.FC<TextQuestionProps> = ({ value, onChange, placeholder }: TextQuestionProps) => {
-  const { options } = useFormContext();
-  const customStyles = options?.styles || {};
-  
-  // Create custom input styles
-  const inputStyle = [
-    inputStyles.input,
-    customStyles.inputBackgroundColor ? { backgroundColor: customStyles.inputBackgroundColor } : undefined,
-    customStyles.inputTextColor ? { color: customStyles.inputTextColor } : undefined,
-    customStyles.inputBorderColor ? { borderColor: customStyles.inputBorderColor } : undefined,
-    customStyles.inputBorderWidth ? { borderWidth: customStyles.inputBorderWidth } : undefined,
-    customStyles.inputBorderRadius ? { borderRadius: customStyles.inputBorderRadius } : undefined
-  ];
-  
+  const { themeStyle } = useTheme();
   return (
     <TextInput
-      style={inputStyle}
+      style={themeStyle.input}
       value={value}
       onChangeText={onChange}
       placeholder={placeholder}

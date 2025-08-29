@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { buttonStyles, useButtonStyle } from '../../../constants/styles/buttons';
 import { SPACING } from '../../../constants/styles/spacing';
+import { useTheme } from '../context/ThemeContext';
 
 export type TrueFalseQuestionProps = {
   value: boolean | null;
@@ -9,22 +9,24 @@ export type TrueFalseQuestionProps = {
 };
 
 export const TrueFalseQuestion: React.FC<TrueFalseQuestionProps> = ({ value, onChange }: TrueFalseQuestionProps) => {
-  const trueButtonStyle = useButtonStyle(value === true ? 'primary' : 'unselected');
-  const falseButtonStyle = useButtonStyle(value === false ? 'primary' : 'unselected');
-  
+  const {themeStyle} = useTheme();
+
+  const trueButtonStyle = value === true ? themeStyle.primaryButton : themeStyle.unselected;
+  const falseButtonStyle = value === false ? themeStyle.primaryButton : themeStyle.unselected;
+
   return (
     <View style={styles.row}>
       <TouchableOpacity
         style={[trueButtonStyle, styles.button]}
         onPress={() => onChange(true)}
       >
-        <Text style={buttonStyles.primaryText}>True</Text>
+        <Text style={themeStyle.primaryButtonText}>True</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={[falseButtonStyle, styles.button]}
         onPress={() => onChange(false)}
       >
-        <Text style={buttonStyles.primaryText}>False</Text>
+        <Text style={themeStyle.primaryButtonText}>False</Text>
       </TouchableOpacity>
     </View>
   );

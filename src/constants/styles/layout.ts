@@ -1,5 +1,4 @@
 import { Dimensions, StyleSheet } from 'react-native';
-import { COLORS } from './colors';
 import { SPACING } from './spacing';
 
 const width = Dimensions.get('window').width;
@@ -8,7 +7,6 @@ const height = Dimensions.get('window').height;
 export const layoutStyles = StyleSheet.create({
   screenContainer: {
     flex: 1,
-    backgroundColor: COLORS.background,
     paddingHorizontal: SPACING.md,
     paddingVertical: SPACING.lg,
   },
@@ -21,7 +19,6 @@ export const layoutStyles = StyleSheet.create({
     alignItems: "center",
   },
   card: {
-    backgroundColor: COLORS.card,
     borderRadius: 14,
     padding: SPACING.md,
     shadowColor: "#000",
@@ -36,7 +33,6 @@ export const layoutStyles = StyleSheet.create({
     height: height,
     justifyContent: 'center',
     padding: 24,
-    backgroundColor: COLORS.background,
   },
   buttonRow: {
     position: 'absolute',

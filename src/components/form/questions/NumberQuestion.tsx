@@ -1,6 +1,6 @@
 import React from 'react';
 import { TextInput } from 'react-native';
-import { inputStyles } from '../../../constants/styles/inputs';
+import { useTheme } from '../context/ThemeContext';
 
 export type NumberQuestionProps = {
   value: string | number;
@@ -8,12 +8,15 @@ export type NumberQuestionProps = {
   placeholder?: string;
 };
 
-export const NumberQuestion: React.FC<NumberQuestionProps> = ({ value, onChange, placeholder }: NumberQuestionProps) => (
-  <TextInput
-    style={inputStyles.input}
-    value={String(value)}
-    onChangeText={onChange}
-    placeholder={placeholder}
-    keyboardType="numeric"
-  />
-);
+export const NumberQuestion: React.FC<NumberQuestionProps> = ({ value, onChange, placeholder }: NumberQuestionProps) => {
+  const { themeStyle } = useTheme();
+  return (
+    <TextInput
+      style={themeStyle.input}
+      value={String(value)}
+      onChangeText={onChange}
+      placeholder={placeholder}
+      keyboardType="numeric"
+    />
+  );
+};

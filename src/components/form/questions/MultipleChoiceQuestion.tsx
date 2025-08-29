@@ -1,8 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { buttonStyles, useButtonStyle } from '../../../constants/styles/buttons';
-import { inputStyles } from '../../../constants/styles/inputs';
-import { SPACING } from '../../../constants/styles/spacing';
+import { Text, TouchableOpacity, View } from 'react-native';
+import { useTheme } from '../context/ThemeContext';
 
 export type MultipleChoiceQuestionProps = {
   value: string | null;
@@ -10,29 +8,30 @@ export type MultipleChoiceQuestionProps = {
   options: string[];
 };
 
-export const MultipleChoiceQuestion: React.FC<MultipleChoiceQuestionProps> = ({ value, onChange, options }: MultipleChoiceQuestionProps) => (
-  <View style={inputStyles.multipleChoiceContainer}>
-    {options.map(option => {
-      const buttonStyle = useButtonStyle(
-        value === option ? 'primary' : 'unselected'
-      );
-      
-      return (
-        <TouchableOpacity
-          key={option}
-          style={[buttonStyle, styles.optionButton]}
-          onPress={() => onChange(option)}
-        >
-          <Text style={buttonStyles.primaryText}>{option}</Text>
-        </TouchableOpacity>
-      );
-    })}
-  </View>
-);
-
-const styles = StyleSheet.create({
-  optionButton: {
-    margin: SPACING.sm,
-    width: '100%',
-  },
-});
+export const MultipleChoiceQuestion: React.FC<MultipleChoiceQuestionProps> = ({ value, onChange, options }: MultipleChoiceQuestionProps) => {
+  const { themeStyle } = useTheme();
+  return (
+    <View style={themeStyle.multipleChoiceContainer}>
+      {options.map(option => {
+        const buttonStyle = value === option
+        ? {
+          button: themeStyle.primaryButton,
+          text: themeStyle.primaryButtonText
+        }
+        : {
+          button: themeStyle.secondaryButton,
+          text: themeStyle.secondaryButtonText
+        };
+        return (
+          <TouchableOpacity
+            key={option}
+            style={[buttonStyle.button, themeStyle.optionButton]}
+            onPress={() => onChange(option)}
+          >
+            <Text style={buttonStyle.text}>{option}</Text>
+          </TouchableOpacity>
+        );
+      })}
+    </View>
+  );
+}
