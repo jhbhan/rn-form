@@ -8,7 +8,7 @@ export const createInputStyles = (colors: ColorStyle) => {
     input: {
       borderWidth: 1,
       borderColor: colors.border,
-      backgroundColor: colors.background,
+      backgroundColor: '#FFFFFF',
       borderRadius: 10,
       padding: SPACING.sm,
       fontSize: FONT_SIZES.md,

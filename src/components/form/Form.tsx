@@ -48,6 +48,7 @@ const FormComponent: React.FC<StepFormProps> = (props) => {
 	const verticalPosition = useSharedValue(0);
 	const quarterWayDown = Dimensions.get('window').height / 4;
 	// Animated style
+	
 	const animatedStyle = useAnimatedStyle(() => ({
 		transform: [{ translateY: verticalPosition.value }],
 	}));
