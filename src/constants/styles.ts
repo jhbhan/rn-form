@@ -16,6 +16,10 @@ export const createStyles = (customStyle?: FormStyles) => {
     screenContainer: {
       flex: 1,
       backgroundColor: colors.background,
+      paddingHorizontal: SPACING.md,
+      paddingVertical: SPACING.lg,
+      justifyContent: 'center',
+      alignItems: 'center',
     },
     row: {
       flexDirection: "row",

@@ -49,5 +49,5 @@ export const layoutStyles = StyleSheet.create({
     right: 0,
     zIndex: 10,
     padding: 8,
-  }
+  },
 });

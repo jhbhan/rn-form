@@ -1,13 +1,13 @@
 
 import React, { useMemo } from 'react';
-import { Dimensions, GestureResponderEvent, PanResponder, PanResponderGestureState, TouchableOpacity, Text } from 'react-native';
+import { Dimensions, GestureResponderEvent, PanResponder, PanResponderGestureState, Text, TouchableOpacity } from 'react-native';
 import Animated, { SlideInDown, SlideOutDown, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import { ANIMATION_CONFIG, layoutStyles } from '../../constants/styles';
 import { FormAnswerType, FormOptions, FormQuestion } from '../../constants/types';
 import { FormProvider, useFormContext } from './context/FormContext';
+import { ThemeProvider, useTheme } from './context/ThemeContext';
 import { FormNavigationButtons } from './FormNavigationButtons';
 import { FormQuestionsContainer } from './FormQuestionsContainer';
-import { ThemeProvider, useTheme } from './context/ThemeContext';
 
 export type StepFormProps = {
 	options?: FormOptions;
