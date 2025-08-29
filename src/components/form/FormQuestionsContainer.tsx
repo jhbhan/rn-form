@@ -7,7 +7,7 @@ import { FormQuestion } from './FormQuestion';
 import { useTheme } from './context/ThemeContext';
 
 export const FormQuestionsContainer: React.FC = () => {
-  const { current, nextIndex, nextStyle, answers, setAnswer, questions, options } = useFormContext();
+  const { current, nextIndex, nextStyle, answers, setAnswer, questions } = useFormContext();
   const { themeStyle } = useTheme();
   // Create custom question text styles
   const questionTextStyle = [

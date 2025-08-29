@@ -5,14 +5,9 @@ import { useFormContext } from './context/FormContext';
 import { useTheme } from './context/ThemeContext';
 
 export const FormNavigationButtons: React.FC = () => {
-    const { current, goToPrev, goToNext, inAnimation, questions, answers, options } = useFormContext();
+    const { current, goToPrev, goToNext, questions, isLastQuestion, isPrevDisabled, isNextDisabled, options } = useFormContext();
     const { showProgress } = options;
     const { themeStyle } = useTheme();
-
-    const isQuestionRequired = questions[current]?.required || false;
-    const isNextDisabled = inAnimation || (isQuestionRequired && !answers[questions[current].id]);
-    const isLastQuestion = current === questions.length - 1;
-    const isPrevDisabled = current === 0 || inAnimation;
 
     const prevButtonStyle = [themeStyle.secondaryButton, isPrevDisabled && themeStyle.disabledButton];
     const nextButtonStyle = [themeStyle.primaryButton, isNextDisabled && themeStyle.disabledButton];

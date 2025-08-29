@@ -13,7 +13,9 @@ interface FormContextType {
   answers: FormQuestionAnswers;
   setAnswer: (questionId: number, answer: string | number | boolean) => void;
   questions: FormQuestion[];
-  inAnimation?: boolean; // Optional prop to indicate if an animation is in progress
+  isLastQuestion: boolean;
+  isNextDisabled: boolean;
+  isPrevDisabled: boolean;
   options: FormOptions; // Options for the form
 }
 
@@ -118,6 +120,11 @@ export const FormProvider: React.FC<FormProviderProps> = ({ options, children, p
         transform: [{ translateX: nextTranslateX.value }]
     }));
 
+    const isQuestionRequired = questions[current]?.required || false;
+    const isNextDisabled = inAnimation || (isQuestionRequired && !answers[questions[current].id]);
+    const isPrevDisabled = current === 0 || inAnimation;
+    const isLastQuestion = current === questions.length - 1;
+
     return (
         <FormContext.Provider
             value={{
@@ -130,8 +137,10 @@ export const FormProvider: React.FC<FormProviderProps> = ({ options, children, p
                 animate,
                 answers,
                 setAnswer,
+                isLastQuestion,
+                isNextDisabled,
+                isPrevDisabled,
                 questions: dependancyMetQuestions,
-                inAnimation,
                 options: {
                     showNavigationButtons,
                     buttonOptions,

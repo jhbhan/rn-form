@@ -43,18 +43,15 @@ export const StepForm: React.FC<StepFormProps> = (props) => {
 }
 
 const FormComponent: React.FC<StepFormProps> = (props) => {
-	const { goToNext, goToPrev, current, questions, inAnimation, answers } = useFormContext();
+	const { goToNext, goToPrev, current, isNextDisabled, isPrevDisabled } = useFormContext();
 	const { themeStyle } = useTheme()
 	const verticalPosition = useSharedValue(0);
 	const quarterWayDown = Dimensions.get('window').height / 4;
 	// Animated style
-	
+
 	const animatedStyle = useAnimatedStyle(() => ({
 		transform: [{ translateY: verticalPosition.value }],
 	}));
-	const isQuestionRequired = questions[current]?.required || false;
-	const isNextDisabled = inAnimation || (isQuestionRequired && !answers[questions[current].id]);
-	const isPrevDisabled = current === 0 || inAnimation;
 
 	const panResponder = useMemo(() =>
 		PanResponder.create({
