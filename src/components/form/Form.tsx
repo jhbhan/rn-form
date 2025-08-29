@@ -7,7 +7,7 @@ import { FormAnswerType, FormOptions, FormQuestion } from '../../constants/types
 import { FormProvider, useFormContext } from './context/FormContext';
 import { FormNavigationButtons } from './FormNavigationButtons';
 import { FormQuestionsContainer } from './FormQuestionsContainer';
-import { useTheme } from './context/ThemeContext';
+import { ThemeProvider, useTheme } from './context/ThemeContext';
 
 export type StepFormProps = {
 	options?: FormOptions;
@@ -35,7 +35,9 @@ export const StepForm: React.FC<StepFormProps> = (props) => {
 			}}
 			options={props.options}
 		>
-			<FormComponent {...props} />
+			<ThemeProvider style={props.options?.styles}>
+				<FormComponent {...props} />
+			</ThemeProvider>
 		</FormProvider>
 	);
 }

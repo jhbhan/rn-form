@@ -9,8 +9,8 @@ import { createTypographyStyles, FONT_SIZES } from './styles/typography';
 import { FormStyles } from './types';
 import { createButtonStyles, createInputStyles } from './styles/index';
 
-export const createStyles = (style: FormStyles) => {
-  const COLORS = getColors(style.colors);
+export const createStyles = (customStyle?: FormStyles) => {
+  const COLORS = getColors(customStyle?.colors);
   const layoutStyle = StyleSheet.create({
     // Layout
     screenContainer: {

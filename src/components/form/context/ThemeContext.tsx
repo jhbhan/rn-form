@@ -12,7 +12,7 @@ interface ThemeContextProps {
 
 const ThemeContext = createContext<ThemeContextProps | undefined>(undefined);
 
-export const ThemeProvider = ({ style, children }: { style: FormStyles; children: ReactNode }) => {
+export const ThemeProvider = ({ style, children }: { style?: FormStyles; children: ReactNode }) => {
     const [theme, setTheme] = useState<Theme>('light');
     const themeStyle = createStyles(style);
     return (

@@ -24,16 +24,16 @@ const defaultColors: ColorStyle = {
   danger: "#F7B2B7", // soft pink
 } as const;
 
-export const getColors = (colors: ColorStyle) => {
+export const getColors = (colors?: ColorStyle) => {
   return {
-    primary: colors.primary || defaultColors.primary,
-    secondary: colors.secondary || defaultColors.secondary,
-    background: colors.background || defaultColors.background,
-    card: colors.card || defaultColors.card,
-    textPrimary: colors.textPrimary || defaultColors.textPrimary,
-    textSecondary: colors.textSecondary || defaultColors.textSecondary,
-    border: colors.border || defaultColors.border,
-    success: colors.success || defaultColors.success,
-    danger: colors.danger || defaultColors.danger,
+    primary: colors?.primary || defaultColors.primary,
+    secondary: colors?.secondary || defaultColors.secondary,
+    background: colors?.background || defaultColors.background,
+    card: colors?.card || defaultColors.card,
+    textPrimary: colors?.textPrimary || defaultColors.textPrimary,
+    textSecondary: colors?.textSecondary || defaultColors.textSecondary,
+    border: colors?.border || defaultColors.border,
+    success: colors?.success || defaultColors.success,
+    danger: colors?.danger || defaultColors.danger,
   }
 }
