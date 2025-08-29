@@ -88,7 +88,6 @@ const FormComponent: React.FC<StepFormProps> = (props) => {
 			entering={SlideInDown.duration(ANIMATION_CONFIG.slideInDuration)}
 			exiting={SlideOutDown.duration(ANIMATION_CONFIG.slideOutDuration)}
 			style={[
-				layoutStyles.animatedViewContainer,
 				themeStyle.screenContainer,
 				animatedStyle
 			]}

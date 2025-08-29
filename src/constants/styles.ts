@@ -10,12 +10,12 @@ import { FormStyles } from './types';
 import { createButtonStyles, createInputStyles } from './styles/index';
 
 export const createStyles = (customStyle?: FormStyles) => {
-  const COLORS = getColors(customStyle?.colors);
+  const colors = getColors(customStyle?.colors);
   const layoutStyle = StyleSheet.create({
     // Layout
     screenContainer: {
       flex: 1,
-      backgroundColor: COLORS.background,
+      backgroundColor: colors.background,
       paddingHorizontal: SPACING.md,
       paddingVertical: SPACING.lg,
     },
@@ -32,26 +32,26 @@ export const createStyles = (customStyle?: FormStyles) => {
     heading: {
       fontSize: FONT_SIZES.xl,
       fontWeight: "bold",
-      color: COLORS.textPrimary,
+      color: colors.textPrimary,
       marginBottom: SPACING.sm,
     },
     subheading: {
       fontSize: FONT_SIZES.lg,
       fontWeight: "600",
-      color: COLORS.textSecondary,
+      color: colors.textSecondary,
       marginBottom: SPACING.sm,
     },
     bodyText: {
       fontSize: FONT_SIZES.md,
-      color: COLORS.textPrimary,
+      color: colors.textPrimary,
     },
     smallText: {
       fontSize: FONT_SIZES.sm,
-      color: COLORS.textSecondary,
+      color: colors.textSecondary,
     },
     // Cards
     card: {
-      backgroundColor: COLORS.card,
+      backgroundColor: colors.card,
       borderRadius: 14,
       padding: SPACING.md,
       shadowColor: "#000",
@@ -64,11 +64,11 @@ export const createStyles = (customStyle?: FormStyles) => {
     // Inputs
     input: {
       borderWidth: 1,
-      borderColor: COLORS.border,
+      borderColor: colors.border,
       borderRadius: 10,
       padding: SPACING.sm,
       fontSize: FONT_SIZES.md,
-      color: COLORS.textPrimary,
+      color: colors.textPrimary,
       backgroundColor: "#FFF",
     },
 
@@ -81,22 +81,22 @@ export const createStyles = (customStyle?: FormStyles) => {
       justifyContent: "center",
     },
     badgeSuccess: {
-      backgroundColor: COLORS.success,
+      backgroundColor: colors.success,
     },
     badgeDanger: {
-      backgroundColor: COLORS.danger,
+      backgroundColor: colors.danger,
     },
     badgeText: {
-      color: COLORS.textPrimary,
+      color: colors.textPrimary,
       fontSize: FONT_SIZES.sm,
       fontWeight: "bold",
     },
   });
 
-  const buttonStyle = createButtonStyles(COLORS);
+  const buttonStyle = createButtonStyles(colors);
 
-  const inputStyle = createInputStyles(COLORS);
-  const typographyStyle = createTypographyStyles(COLORS);
+  const inputStyle = createInputStyles(colors);
+  const typographyStyle = createTypographyStyles(colors);
 
   return {
     ...layoutStyle,
