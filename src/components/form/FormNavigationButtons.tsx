@@ -12,9 +12,10 @@ export const FormNavigationButtons: React.FC = () => {
     const isQuestionRequired = questions[current]?.required || false;
     const isNextDisabled = inAnimation || (isQuestionRequired && !answers[questions[current].id]);
     const isLastQuestion = current === questions.length - 1;
-    
-    const prevButtonStyle = themeStyle.secondaryButton;
-    const nextButtonStyle = themeStyle.primaryButton;
+    const isPrevDisabled = current === 0 || inAnimation;
+
+    const prevButtonStyle = [themeStyle.secondaryButton, isPrevDisabled && themeStyle.disabledButton];
+    const nextButtonStyle = [themeStyle.primaryButton, isNextDisabled && themeStyle.disabledButton];
 
     return (
         <View style={layoutStyles.buttonRow}>
@@ -31,9 +32,9 @@ export const FormNavigationButtons: React.FC = () => {
             <TouchableOpacity
                 style={prevButtonStyle}
                 onPress={goToPrev}
-                disabled={current === 0 || inAnimation}
+                disabled={isPrevDisabled}
             >
-                <Text style={themeStyle.secondaryButtonText}>
+                <Text style={prevButtonStyle}>
                     {options?.buttonOptions?.prevButtonText || 'Back'}
                 </Text>
             </TouchableOpacity>
@@ -42,7 +43,7 @@ export const FormNavigationButtons: React.FC = () => {
                 onPress={goToNext}
                 disabled={isNextDisabled}
             >
-                <Text style={themeStyle.primaryButtonText}>
+                <Text style={nextButtonStyle}>
                     {isLastQuestion ? 'Finish' : (options?.buttonOptions?.nextButtonText || 'Next')}
                 </Text>
             </TouchableOpacity>
