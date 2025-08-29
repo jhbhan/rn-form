@@ -5,6 +5,7 @@ import Animated, { SlideInDown, SlideOutDown, useAnimatedStyle, useSharedValue, 
 import { ANIMATION_CONFIG, layoutStyles } from '../../constants/styles';
 import { FormAnswerType, FormOptions, FormQuestion } from '../../constants/types';
 import { FormProvider, useFormContext } from './context/FormContext';
+import { FormAnimationProvider } from './context/FormAnimationContext';
 import { FormNavigationButtons } from './FormNavigationButtons';
 import { FormQuestionsContainer } from './FormQuestionsContainer';
 import { ThemeProvider, useTheme } from './context/ThemeContext';
@@ -25,21 +26,23 @@ export type StepFormProps = {
  * @returns The FormComponent wrapped in a FormProvider.
  */
 export const StepForm: React.FC<StepFormProps> = (props) => {
-	return (
-		<FormProvider
-			props={{
-				questions: props.questions,
-				answers: props.answers,
-				onAnswerChange: props.onAnswerChange,
-				onFormComplete: props.onFormComplete,
-			}}
-			options={props.options}
-		>
-			<ThemeProvider style={props.options?.styles}>
-				<FormComponent {...props} />
-			</ThemeProvider>
-		</FormProvider>
-	);
+ return (
+	 <FormProvider
+		 props={{
+			 questions: props.questions,
+			 answers: props.answers,
+			 onAnswerChange: props.onAnswerChange,
+			 onFormComplete: props.onFormComplete,
+		 }}
+		 options={props.options}
+	 >
+		 <FormAnimationProvider>
+			 <ThemeProvider style={props.options?.styles}>
+				 <FormComponent {...props} />
+			 </ThemeProvider>
+		 </FormAnimationProvider>
+	 </FormProvider>
+ );
 }
 
 const FormComponent: React.FC<StepFormProps> = (props) => {

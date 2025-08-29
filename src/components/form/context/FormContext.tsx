@@ -1,27 +1,22 @@
 import { createContext, ReactNode, useContext, useMemo, useState } from 'react';
-import { runOnJS, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
+import { useFormAnimation } from './FormAnimationContext';
 import { FormAnswerType, FormOptions, FormQuestion, FormQuestionAnswers } from '../../../constants/types';
 
 interface FormContextType {
-  current: number;
-  nextIndex: number | null;
-  currentStyle: any;
-  nextStyle: any;
-  goToNext: () => void;
-  goToPrev: () => void;
-  animate: (newIndex: number, dir: number) => void;
-  answers: FormQuestionAnswers;
-  setAnswer: (questionId: number, answer: string | number | boolean) => void;
-  questions: FormQuestion[];
-  isLastQuestion: boolean;
-  isNextDisabled: boolean;
-  isPrevDisabled: boolean;
-  options: FormOptions; // Options for the form
+    current: number;
+    goToNext: () => void;
+    goToPrev: () => void;
+    answers: FormQuestionAnswers;
+    setAnswer: (questionId: number, answer: string | number | boolean) => void;
+    questions: FormQuestion[];
+    isLastQuestion: boolean;
+    isNextDisabled: boolean;
+    isPrevDisabled: boolean;
+    options: FormOptions;
 }
 
 const FormContext = createContext<FormContextType | undefined>(undefined);
 
-const transformationDuration = 300;
 
 interface FormQuestionAnswersProps {
     questions: FormQuestion[];
@@ -41,7 +36,7 @@ export const FormProvider: React.FC<FormProviderProps> = ({ options, children, p
         questions,
         answers,
         onAnswerChange,
-        onFormComplete, // Default to no-op
+        onFormComplete,
     } = props;
     const {
         showNavigationButtons = true,
@@ -50,75 +45,37 @@ export const FormProvider: React.FC<FormProviderProps> = ({ options, children, p
         progressBarType = 'numeric',
     } = options || {};
     const [current, setCurrent] = useState(0);
-    const [nextIndex, setNextIndex] = useState<number | null>(null);
-    const [inAnimation, setInAnimation] = useState(false);
-
-    const currentOpacity = useSharedValue(1);
-    const currentTranslateX = useSharedValue(0);
-    const nextOpacity = useSharedValue(0);
-    const nextTranslateX = useSharedValue(0);
-
     const dependancyMetQuestions = useMemo(() => {
         return questions.filter(q => {
-            if (!q.dependancy) return true; // No dependency, always met
+            if (!q.dependancy) return true;
             const { questionId, value } = q.dependancy;
-            return answers[questionId] === value; // Check if the dependency is met
+            return answers[questionId] === value;
         });
     }, [questions, answers]);
 
-    const animate = (newIndex: number, dir: number) => {
-        setInAnimation(true);
-        setNextIndex(newIndex);
-        nextTranslateX.value = dir * 100;
-        nextOpacity.value = 0;
-        currentOpacity.value = withTiming(0, { duration: transformationDuration });
-        currentTranslateX.value = withTiming(-dir * 40, { duration: transformationDuration });
-        nextOpacity.value = withTiming(1, { duration: transformationDuration });
-        nextTranslateX.value = withTiming(0, { duration: transformationDuration }, (finished) => {
-        if (finished) {
-            runOnJS(setCurrent)(newIndex);
-            runOnJS(setNextIndex)(null);
-            currentOpacity.value = 1;
-            currentTranslateX.value = 0;
-            runOnJS(setInAnimation)(false);
-        }
-        });
-    };
+    const { inAnimation, animate, setInAnimation } = useFormAnimation();
 
     const showCompleteForm = () => {
         onFormComplete();
-        runOnJS(setInAnimation)(true); // Reset animation state
-        currentOpacity.value = withTiming(0, { duration: transformationDuration });
-        currentTranslateX.value = withTiming(-40, { duration: transformationDuration });
-        runOnJS(setInAnimation)(false); // Reset animation state
+        setInAnimation(true);
+        setTimeout(() => setInAnimation(false), 300);
     }
 
     const goToNext = () => {
         if (current + 1 >= dependancyMetQuestions.length) {
-            console.log('Form completed');
-            showCompleteForm(); // Call the completion callback
+            showCompleteForm();
             return;
         }
-        animate(current + 1, 1);
+        animate(current + 1, 1, () => setCurrent(current + 1));
     };
 
     const goToPrev = () => {
-        animate(current - 1, -1);
+        animate(current - 1, -1, () => setCurrent(current - 1));
     };
 
     const setAnswer = (questionId: number, answer: string | number | boolean) => {
         onAnswerChange(questionId, answer);
     };
-
-    const currentStyle = useAnimatedStyle(() => ({
-        opacity: currentOpacity.value,
-        transform: [{ translateX: currentTranslateX.value }]
-    }));
-
-    const nextStyle = useAnimatedStyle(() => ({
-        opacity: nextOpacity.value,
-        transform: [{ translateX: nextTranslateX.value }]
-    }));
 
     const isQuestionRequired = questions[current]?.required || false;
     const isNextDisabled = inAnimation || (isQuestionRequired && !answers[questions[current].id]);
@@ -129,12 +86,8 @@ export const FormProvider: React.FC<FormProviderProps> = ({ options, children, p
         <FormContext.Provider
             value={{
                 current,
-                nextIndex,
-                currentStyle,
-                nextStyle,
                 goToNext,
                 goToPrev,
-                animate,
                 answers,
                 setAnswer,
                 isLastQuestion,
