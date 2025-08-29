@@ -41,15 +41,18 @@ export const StepForm: React.FC<StepFormProps> = (props) => {
 }
 
 const FormComponent: React.FC<StepFormProps> = (props) => {
-	const { goToNext, goToPrev, current } = useFormContext();
+	const { goToNext, goToPrev, current, questions, inAnimation, answers } = useFormContext();
 	const { themeStyle } = useTheme()
 	const verticalPosition = useSharedValue(0);
 	const quarterWayDown = Dimensions.get('window').height / 4;
 	// Animated style
 	const animatedStyle = useAnimatedStyle(() => ({
 		transform: [{ translateY: verticalPosition.value }],
-	}));	
-	
+	}));
+	const isQuestionRequired = questions[current]?.required || false;
+	const isNextDisabled = inAnimation || (isQuestionRequired && !answers[questions[current].id]);
+	const isPrevDisabled = current === 0 || inAnimation;
+
 	const panResponder = useMemo(() =>
 		PanResponder.create({
 			onStartShouldSetPanResponder: (evt, gestureState) => {
@@ -58,14 +61,14 @@ const FormComponent: React.FC<StepFormProps> = (props) => {
 			},
 			onMoveShouldSetPanResponder: (_, gestureState: PanResponderGestureState) => true,
 			onPanResponderMove: (_, gestureState: PanResponderGestureState) => {
-        if (Math.abs(gestureState.dy) > Math.abs(gestureState.dx)) {
-				  verticalPosition.value = gestureState.dy;
-        }
+			if (Math.abs(gestureState.dy) > Math.abs(gestureState.dx)) {
+					verticalPosition.value = gestureState.dy;
+			}
 			},
 			onPanResponderRelease: (evt: GestureResponderEvent, gestureState: PanResponderGestureState) => {
-				if (gestureState.dx < -ANIMATION_CONFIG.horizontalSwipe) {
+				if (gestureState.dx < -ANIMATION_CONFIG.horizontalSwipe && !isNextDisabled) {
 					goToNext();
-				} else if (gestureState.dx > ANIMATION_CONFIG.horizontalSwipe && current > 0) {
+				} else if (gestureState.dx > ANIMATION_CONFIG.horizontalSwipe && !isPrevDisabled) {
 					goToPrev();
 				}
 				// on close on down swipe

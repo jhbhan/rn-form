@@ -12,9 +12,6 @@ export const FormNavigationButtons: React.FC = () => {
     const isQuestionRequired = questions[current]?.required || false;
     const isNextDisabled = inAnimation || (isQuestionRequired && !answers[questions[current].id]);
     const isLastQuestion = current === questions.length - 1;
-
-    // Apply custom styles if provided
-    const customStyles = options?.styles || {};
     
     const prevButtonStyle = themeStyle.secondaryButton;
     const nextButtonStyle = themeStyle.primaryButton;
