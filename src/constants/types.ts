@@ -1,53 +1,133 @@
 import { ColorStyle } from "./styles";
 
+/**
+ * Custom form styles.
+ *
+ * @interface FormStyles
+ * @property {ColorStyle} colors - Color styles for the form.
+ */
 export interface FormStyles {
-    colors: ColorStyle
+  colors: ColorStyle;
 }
 
-export type FormOptions = {
-    showNavigationButtons?: boolean; // Whether to show navigation buttons
-    buttonOptions?: NavigationButtonOptions; // Options for navigation buttons
-    showProgress?: boolean; // Whether to show a progress bar
-    progressBarType?: 'numeric' | 'perecentage' | 'progress-bar';
-    styles?: FormStyles; // Custom styles for the form
-}
+/**
+ * Configuration options for a form.
+ *
+ * @interface {Object} FormOptions
+ * @property {boolean} [showNavigationButtons] - Whether to show navigation buttons.
+ * @property {NavigationButtonOptions} [buttonOptions] - Options for navigation buttons.
+ * @property {boolean} [showProgress] - Whether to show a progress bar.
+ * @property {"numeric" | "percentage" | "progress-bar"} [progressBarType] - Type of progress bar.
+ * @property {FormStyles} [styles] - Custom styles for the form.
+ */
+export interface FormOptions {
+  showNavigationButtons?: boolean;
+  buttonOptions?: NavigationButtonOptions;
+  showProgress?: boolean;
+  progressBarType?: "numeric" | "percentage" | "progress-bar";
+  styles?: FormStyles;
+};
 
+/**
+ * Configuration options for navigation buttons.
+ *
+ * @typedef {Object} NavigationButtonOptions
+ * @property {() => void} [onNext] - Callback for next button.
+ * @property {() => void} [onPrev] - Callback for previous button.
+ * @property {string} [nextButtonText] - Text for next button.
+ * @property {string} [prevButtonText] - Text for previous button.
+ */
 type NavigationButtonOptions = {
-    onNext?: () => void; // Callback for next button
-    onPrev?: () => void; // Callback for previous button
-    nextButtonText?: string; // Text for next button
-    prevButtonText?: string; // Text for previous button
-}
+  onNext?: () => void;
+  onPrev?: () => void;
+  nextButtonText?: string;
+  prevButtonText?: string;
+};
 
+/**
+ * Possible answer values for a form question.
+ *
+ * @typedef {(string | number | boolean)} FormAnswerType
+ */
 export type FormAnswerType = string | number | boolean;
 
+/**
+ * Mapping of question IDs to answers.
+ *
+ * @typedef {Record<number, FormAnswerType>} FormQuestionAnswers
+ */
 export type FormQuestionAnswers = Record<number, FormAnswerType>;
 
+/**
+ * Single answer value for a question.
+ *
+ * @typedef {FormAnswerType} FormQuestionAnswerValue
+ */
 type FormQuestionAnswerValue = FormAnswerType;
 
+/**
+ * Dependency definition for conditional logic between questions.
+ *
+ * @typedef {Object} QuestionDependency
+ * @property {number} questionId - The ID of the question this depends on.
+ * @property {FormQuestionAnswerValue} value - The value that triggers this question to show.
+ */
 type QuestionDependency = {
-    questionId: number; // The ID of the question this depends on
-    value: FormQuestionAnswerValue; // The value that triggers this question to show
-}
+  questionId: number;
+  value: FormQuestionAnswerValue;
+};
 
+/**
+ * Supported formats for form questions.
+ *
+ * @enum {string}
+ */
 export enum QuestionFormat {
-    Text = 'text',
-    Number = 'number',
-    TrueFalse = 'boolean', // For future extensibility
-    MultipleChoice = 'multiple-choice', // For future extensibility
-    MultiSelect = 'multi-select', // For future extensibility
-    Date = 'date', // For future extensibility  
-    Rating = 'rating', // For future extensibility
-    Dropdown = 'dropdown', // For future extensibility
+  /** Text input. */
+  Text = "text",
+
+  /** Numeric input. */
+  Number = "number",
+
+  /** True/False input. */
+  TrueFalse = "boolean",
+
+  /** Multiple choice input. */
+  MultipleChoice = "multiple-choice",
+
+  /** Multiple selection input. */
+  MultiSelect = "multi-select",
+
+  /** Date input. */
+  Date = "date",
+
+  /** Rating input. */
+  Rating = "rating",
+
+  /** Dropdown input. */
+  Dropdown = "dropdown",
 }
 
+/**
+ * Represents a question in a form.
+ *
+ * @interface FormQuestion
+ * @property {number} id - Unique question ID.
+ * @property {string} text - Question text.
+ * @property {QuestionFormat} [format] - Question format/type.
+ * @property {QuestionDependency} [dependancy] - Optional dependency for conditional questions.
+ * @property {string[]} [options] - Options for multiple choice or dropdown questions.
+ * @property {boolean} [required] - Whether this question must be answered.
+ * @property {number} [ratingMin] - Minimum rating value, if applicable.
+ * @property {number} [ratingMax] - Maximum rating value, if applicable.
+ */
 export interface FormQuestion {
   id: number;
   text: string;
   format?: QuestionFormat;
-  dependancy?: QuestionDependency; // Optional dependency for conditional questions
-  options?: string[]; // For multiple choice or dropdown questions
-  required?: boolean; // Whether this question must be answered
-  ratingMin?: number; // Minimum rating value, if applicable
-  ratingMax?: number; // Maximum rating value, if applicable
+  dependancy?: QuestionDependency;
+  options?: string[];
+  required?: boolean;
+  ratingMin?: number;
+  ratingMax?: number;
 }

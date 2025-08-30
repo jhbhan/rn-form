@@ -43,11 +43,4 @@ export const layoutStyles = StyleSheet.create({
     alignSelf: 'center',
     zIndex: 10,
   },
-  closeButton: {
-    position: 'absolute',
-    top: 30,
-    right: 20,
-    zIndex: 10,
-    padding: 8,
-  },
 });

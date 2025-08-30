@@ -1,15 +1,25 @@
 
 import React, { useMemo } from 'react';
-import { Dimensions, GestureResponderEvent, PanResponder, PanResponderGestureState, Text, TouchableOpacity } from 'react-native';
+import { Dimensions, GestureResponderEvent, PanResponder, PanResponderGestureState } from 'react-native';
 import Animated, { SlideInDown, SlideOutDown, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
-import { ANIMATION_CONFIG, layoutStyles } from '../../constants/styles';
+import { ANIMATION_CONFIG } from '../../constants/styles';
 import { FormAnswerType, FormOptions, FormQuestion } from '../../constants/types';
 import { FormProvider, useFormContext } from './context/FormContext';
 import { ThemeProvider, useTheme } from './context/ThemeContext';
 import { FormNavigationButtons } from './FormNavigationButtons';
 import { FormQuestionsContainer } from './FormQuestionsContainer';
 
-export type StepFormProps = {
+/**
+ * Props for the step form component.
+ * @interface StepFormProps
+ * @property {FormOptions} [options] - Configuration options for the form.
+ * @property {FormQuestion[]} questions - The questions to be displayed in the form.
+ * @property {Record<number, FormAnswerType>} answers - The current answers for the questions.
+ * @property {(questionId: number, answer: FormAnswerType) => void} onAnswerChange - Callback when an answer changes.
+ * @property {() => void} onFormComplete - Callback when form is completed.
+ * @property {() => void} closeForm - Callback to close the form.
+ */
+export interface StepFormProps {
 	options?: FormOptions;
 	questions: FormQuestion[];
 	answers: Record<number, FormAnswerType>;
@@ -42,7 +52,7 @@ export const StepForm: React.FC<StepFormProps> = (props) => {
 	);
 }
 
-const FormComponent: React.FC<StepFormProps> = (props) => {
+const FormComponent: React.FC<Pick<StepFormProps, 'closeForm'>> = (props) => {
 	const { goToNext, goToPrev, current, isNextDisabled, isPrevDisabled } = useFormContext();
 	const { themeStyle } = useTheme()
 	const verticalPosition = useSharedValue(0);
@@ -92,17 +102,6 @@ const FormComponent: React.FC<StepFormProps> = (props) => {
 				animatedStyle
 			]}
 		>
-			<TouchableOpacity
-				style={layoutStyles.closeButton}
-				onPress={props.closeForm}
-				hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-			>
-				<Text 
-					style={themeStyle.badgeText}
-				>
-					X
-				</Text>
-			</TouchableOpacity>
 			<FormQuestionsContainer />
 			<FormNavigationButtons />
 		</Animated.View>
