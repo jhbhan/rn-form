@@ -45,8 +45,8 @@ export const layoutStyles = StyleSheet.create({
   },
   closeButton: {
     position: 'absolute',
-    top: 20,
-    right: 0,
+    top: 30,
+    right: 20,
     zIndex: 10,
     padding: 8,
   },
