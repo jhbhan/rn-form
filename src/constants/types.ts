@@ -131,3 +131,9 @@ export interface FormQuestion {
   ratingMin?: number;
   ratingMax?: number;
 }
+
+export enum MoodOption {
+  Happy = 'happy',
+  Neutral = 'neutral',
+  Sad = 'sad',
+}
