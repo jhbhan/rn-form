@@ -14,6 +14,7 @@ export const createStyles = (customStyle?: FormStyles) => {
   const layoutStyle = StyleSheet.create({
     // Layout
     screenContainer: {
+      ...StyleSheet.absoluteFillObject,
       flex: 1,
       backgroundColor: colors.background,
       paddingHorizontal: SPACING.md,
