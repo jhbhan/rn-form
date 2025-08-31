@@ -121,7 +121,11 @@ export const FormProvider: React.FC<FormProviderProps> = ({ options, children, p
     }));
 
     const isQuestionRequired = questions[current]?.required || false;
-    const isNextDisabled = inAnimation || (isQuestionRequired && !answers[questions[current].id]);
+const isNextDisabled =
+  inAnimation ||
+  (isQuestionRequired &&
+    (questions[current] === undefined ||
+      !(questions[current].id in answers)));
     const isPrevDisabled = current === 0 || inAnimation;
     const isLastQuestion = current === questions.length - 1;
 
