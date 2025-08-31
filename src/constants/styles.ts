@@ -21,6 +21,8 @@ export const createStyles = (customStyle?: FormStyles) => {
       paddingVertical: SPACING.lg,
       justifyContent: 'center',
       alignItems: 'center',
+      zIndex: 1000,
+      elevation: 1000
     },
     row: {
       flexDirection: "row",
